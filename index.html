@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>Hello from Electron renderer!</title>
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="container mt-5">
+        <div clas="row mb-5">
+          <button class="btn btn-secondary me-2" id="clearBtn">
+            Clear Checkboxes
+          </button>
+          <button class="btn btn-primary mx-2" id="selectAllBtn">
+            Select All
+          </button>
+        </div>
+
+        <div id="solutionsContainer"></div>
+        <button class="btn btn-success mt-2" id="launchBtn">
+          Launch Selected Solutions
+        </button>
+      </div>
+    </main>
+  </body>
+  <script src="./renderer.js"></script>
+  <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+  <script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</html>

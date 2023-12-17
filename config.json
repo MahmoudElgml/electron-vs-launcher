@@ -1,0 +1,40 @@
+{
+    "solutions": [
+        {
+            "name": "APG Membership",
+            "path": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\APGMembership.sln"
+        },
+        {
+            "name": "APG Portal API Gateway",
+            "path": "D:\\git-repos\\amwal-pay\\APG.PortalAPIGateway\\APGPortalAPIGateway.sln"
+        },
+        {
+            "name": "APG Fundamental",
+            "path": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\APGFundamentals.sln"
+        },
+        {
+            "name": "APG Transaction",
+            "path": "D:\\git-repos\\amwal-pay\\APG.TransactionModulesAPIs\\APGTransaction.sln"
+        },
+        {
+            "name": "APG Log",
+            "path": "D:\\git-repos\\amwal-pay\\APG.LogModulesAPIs\\APGLogs.sln"
+        },
+        {
+            "name": "APG Smartbox API Gateway",
+            "path": "D:\\git-repos\\amwal-pay\\APG.SmartBoxAPIGateway\\APGSmartBoxAPIGateway.sln"
+        },
+        {
+            "name": "APG Execution",
+            "path": "D:\\git-repos\\amwal-pay\\APG.ExecutionModulesAPIs\\APGExecutions.sln"
+        },
+        {
+            "name": "APG Digital Integration",
+            "path": "D:\\git-repos\\amwal-pay\\APG.MPCSSIntegrationAPIs\\APGDigitalIntegration.sln"
+        },
+        {
+            "name": "APG Notification",
+            "path": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\APGNotifications.sln"
+        }
+    ]
+}
