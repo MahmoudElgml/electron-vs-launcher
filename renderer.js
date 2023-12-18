@@ -35,7 +35,6 @@ electron.ipcRenderer.on("receive-solutions", (solutions) => {
       "btn",
       "btn-secondary",
       "ms-3",
-      "fs-6",
       "btn-sm"
     );
     getLatestButton.innerHTML =
@@ -47,6 +46,18 @@ electron.ipcRenderer.on("receive-solutions", (solutions) => {
     formCheckDiv.appendChild(label);
     formCheckDiv.appendChild(getLatestButton);
 
+    if (solution?.migratorPath != null) {
+      const updateDbButton = document.createElement("button"); 
+      updateDbButton.classList.add(
+        "btn",
+        "btn-warning",
+        "ms-3",
+        "btn-sm"
+      );
+      updateDbButton.innerHTML='Update Db'
+      updateDbButton.onclick= () => openVisualStudioDebug(solution.migratorPath);
+      formCheckDiv.appendChild(updateDbButton);
+    }
     // Append the form-check div to the solutions container
     solutionsContainer.appendChild(formCheckDiv);
 
@@ -65,10 +76,17 @@ function getLatest(solutionPath) {
   electron.ipcRenderer.once("get-latest-result", (result) => {
     if (result.success) {
       console.log("Get Latest successful:", result.output);
+      showNotification('Get Latest Successful', result.output);
     } else {
-      console.error("Error getting latest:", result.error);
+      // console.error("Error getting latest:", result.error);
+      showNotification("Error getting latest:", result.output);
+
     }
   });
+}
+
+function openVisualStudioDebug(path){
+  electron.ipcRenderer.send("launch-solution-in-debug",path);
 }
 
 function launchSelectedSolutions() {
@@ -96,3 +114,15 @@ function selectAllCheckboxes() {
     checkbox.checked = true;
   });
 }
+
+function showNotification(title, message) {
+  const NOTIFICATION_TITLE = title
+  const NOTIFICATION_BODY = message
+  const CLICK_MESSAGE = "click to show"
+  
+  new window.Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY })
+    .onclick = () => { document.getElementById('output').innerText = CLICK_MESSAGE }
+}
+
+
+

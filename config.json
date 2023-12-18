@@ -2,7 +2,8 @@
     "solutions": [
         {
             "name": "APG Membership",
-            "path": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\APGMembership.sln"
+            "path": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\APGMembership.sln",
+            "migratorPath":"D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\APGMembership.sln"
         },
         {
             "name": "APG Portal API Gateway",

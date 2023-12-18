@@ -24,12 +24,21 @@ ipcMain.on("launch-solutions", (event, selectedSolutions) => {
   });
 });
 
-function launchVisualStudioSolution(solutionPath) {
+ipcMain.on("launch-solution-in-debug", (event, path) => {
+    launchVisualStudioSolution(path,true);
+});
+
+
+function launchVisualStudioSolution(solutionPath,isDebugMode) {
   const devenvPath =
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe";
   if (fs.existsSync(devenvPath)) {
     const options = { windowsHide: true }; // Hide the command prompt window
-    const child = spawn("devenv", [solutionPath], options);
+    const args= [`${solutionPath}`]
+    if(isDebugMode){
+      args.push('/Run')
+    }
+    const child = spawn("devenv", args, options);
 
     // Handle process events
     child.stdout.on("data", (data) => {
