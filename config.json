@@ -11,11 +11,13 @@
         },
         {
             "name": "APG Fundamental",
-            "path": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\APGFundamentals.sln"
+            "path": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\APGFundamentals.sln",
+            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\APGFundamentals.sln"
         },
         {
             "name": "APG Transaction",
-            "path": "D:\\git-repos\\amwal-pay\\APG.TransactionModulesAPIs\\APGTransaction.sln"
+            "path": "D:\\git-repos\\amwal-pay\\APG.TransactionModulesAPIs\\APGTransaction.sln",
+            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.TransactionModulesAPIs\\APGTransaction.sln"
         },
         {
             "name": "APG Log",
@@ -31,11 +33,13 @@
         },
         {
             "name": "APG Digital Integration",
-            "path": "D:\\git-repos\\amwal-pay\\APG.MPCSSIntegrationAPIs\\APGDigitalIntegration.sln"
+            "path": "D:\\git-repos\\amwal-pay\\APG.MPCSSIntegrationAPIs\\APGDigitalIntegration.sln",
+            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.MPCSSIntegrationAPIs\\APGDigitalIntegration.sln"
         },
         {
             "name": "APG Notification",
-            "path": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\APGNotifications.sln"
+            "path": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\APGNotifications.sln",
+            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\APGNotifications.sln"
         }
     ]
 }

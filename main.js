@@ -20,7 +20,7 @@ app.whenReady().then(() => {
 
 ipcMain.on("launch-solutions", (event, selectedSolutions) => {
   selectedSolutions.forEach((solution) => {
-    launchVisualStudioSolution(solution);
+    launchVisualStudioSolution(solution,false);
   });
 });
 
@@ -76,6 +76,7 @@ ipcMain.on("get-solutions", (event) => {
 
 ipcMain.on("get-latest", (event, solutionPath) => {
   let pathArray = solutionPath.split("\\");
+  let name=pathArray[pathArray.length-1]
   pathArray.pop();
   let pathWithoutFileName = pathArray.join("\\");
   exec(
@@ -84,11 +85,11 @@ ipcMain.on("get-latest", (event, solutionPath) => {
       if (error) {
         event.reply("get-latest-result", {
           success: false,
-          error: error.message,
+          error: error.message + `${name}`,
         });
         return;
       }
-      event.reply("get-latest-result", { success: true, output: stdout });
+      event.reply("get-latest-result", { success: true, output: `${name} `+stdout });
     }
   );
 });

@@ -76,10 +76,10 @@ function getLatest(solutionPath) {
   electron.ipcRenderer.once("get-latest-result", (result) => {
     if (result.success) {
       console.log("Get Latest successful:", result.output);
-      showNotification('Get Latest Successful', result.output);
+      showNotification('Get Latest Successful', result.output,'success');
     } else {
       // console.error("Error getting latest:", result.error);
-      showNotification("Error getting latest:", result.output);
+      showNotification("Error getting latest:", result.error,'error');
 
     }
   });
@@ -115,12 +115,18 @@ function selectAllCheckboxes() {
   });
 }
 
-function showNotification(title, message) {
+function showNotification(title, message,state) {
   const NOTIFICATION_TITLE = title
   const NOTIFICATION_BODY = message
   const CLICK_MESSAGE = "click to show"
+  var ICON=''
   
-  new window.Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY })
+  if(state=='success'){
+    ICON="check.png"
+  }else{
+    ICON="close.png"
+  }
+  new window.Notification(NOTIFICATION_TITLE, { body: NOTIFICATION_BODY,icon:ICON,renotify:false})
     .onclick = () => { document.getElementById('output').innerText = CLICK_MESSAGE }
 }
 
