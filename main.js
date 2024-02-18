@@ -25,27 +25,18 @@ ipcMain.on("launch-solutions", (event, selectedSolutions) => {
 });
 
 ipcMain.on("update-db", (event, migratorPath) => {
-  const args = ['run'];
+  const args = ["run"];
   args.push(`--project`, migratorPath);
 
-  const options = { windowsHide: false };
-  const child = spawn("dotnet", args, options);
-  
-  
-  child.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
-  });
-
-  child.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
-  });
+  const options = { shell: true, detached: true, stdio: "inherit" };
+  const child = spawn("cmd.exe", ["/k", "dotnet", ...args], options);
 
   child.on("close", (code) => {
     console.log(`Child process exited with code ${code}`);
   });
 
   child.on("error", (err) => {
-    console.error("Error Runing Migration:", err);
+    console.error("Error Running Migration:", err);
   });
 });
 
