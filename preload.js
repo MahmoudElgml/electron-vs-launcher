@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer,Notification } = require('electron');
 contextBridge.exposeInMainWorld('electron', {
   ipcRenderer: {
     send: (channel, data) => {
-      const validChannels = ['get-solutions', 'launch-solutions','get-latest','launch-solution-in-debug'];
+      const validChannels = ['get-solutions', 'launch-solutions','get-latest','launch-solution-without-debug'];
       if (validChannels.includes(channel)) {
         ipcRenderer.send(channel, data);
       }

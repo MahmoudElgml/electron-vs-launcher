@@ -85,7 +85,7 @@ function getLatest(solutionPath) {
 }
 
 function openVisualStudioDebug(path){
-  electron.ipcRenderer.send("launch-solution-in-debug",path);
+  electron.ipcRenderer.send("launch-solution-without-debug",path);
 }
 
 function launchSelectedSolutions() {

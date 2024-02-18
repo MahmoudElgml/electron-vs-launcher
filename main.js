@@ -24,7 +24,7 @@ ipcMain.on("launch-solutions", (event, selectedSolutions) => {
   });
 });
 
-ipcMain.on("launch-solution-in-debug", (event, path) => {
+ipcMain.on("launch-solution-without-debug", (event, path) => {
   launchVisualStudioSolution(path, true);
 });
 
