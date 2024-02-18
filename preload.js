@@ -18,7 +18,7 @@ contextBridge.exposeInMainWorld('electron', {
     once: (channel, listener) => {
       const validChannels = ['get-latest-result'];
       if (validChannels.includes(channel)) {
-        ipcRenderer.on(channel, (event, ...args) => listener(...args));
+        ipcRenderer.once(channel, (event, ...args) => listener(...args));
       }
     },
   }

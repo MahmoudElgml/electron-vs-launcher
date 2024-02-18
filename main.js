@@ -20,27 +20,28 @@ app.whenReady().then(() => {
 
 ipcMain.on("launch-solutions", (event, selectedSolutions) => {
   selectedSolutions.forEach((solution) => {
-    launchVisualStudioSolution(solution,false);
+    launchVisualStudioSolution(solution, false);
   });
 });
 
 ipcMain.on("launch-solution-in-debug", (event, path) => {
-    launchVisualStudioSolution(path,true);
+  launchVisualStudioSolution(path, true);
 });
 
-
-function launchVisualStudioSolution(solutionPath,isDebugMode) {
+function launchVisualStudioSolution(solutionPath, isDebugMode) {
   const devenvPath =
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe";
   if (fs.existsSync(devenvPath)) {
-    const options = { windowsHide: true }; // Hide the command prompt window
-    const args= [`${solutionPath}`]
-    if(isDebugMode){
-      args.push('/Run')
+    
+    const args = [solutionPath];
+    if (isDebugMode) {
+      const withoutDebugConfig = "Debug.StartWithoutDebugging";
+      args.push(`/Command`, withoutDebugConfig);
     }
+
+    const options = { windowsHide: false }; 
     const child = spawn("devenv", args, options);
 
-    // Handle process events
     child.stdout.on("data", (data) => {
       console.log(`stdout: ${data}`);
     });
@@ -76,7 +77,7 @@ ipcMain.on("get-solutions", (event) => {
 
 ipcMain.on("get-latest", (event, solutionPath) => {
   let pathArray = solutionPath.split("\\");
-  let name=pathArray[pathArray.length-1]
+  let name = pathArray[pathArray.length - 1];
   pathArray.pop();
   let pathWithoutFileName = pathArray.join("\\");
   exec(
@@ -89,7 +90,10 @@ ipcMain.on("get-latest", (event, solutionPath) => {
         });
         return;
       }
-      event.reply("get-latest-result", { success: true, output: `${name} `+stdout });
+      event.reply("get-latest-result", {
+        success: true,
+        output: `${name} ` + stdout,
+      });
     }
   );
 });

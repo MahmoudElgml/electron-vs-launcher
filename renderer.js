@@ -80,7 +80,6 @@ function getLatest(solutionPath) {
     } else {
       // console.error("Error getting latest:", result.error);
       showNotification("Error getting latest:", result.error,'error');
-
     }
   });
 }
