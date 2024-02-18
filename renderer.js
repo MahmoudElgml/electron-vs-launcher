@@ -47,45 +47,41 @@ electron.ipcRenderer.on("receive-solutions", (solutions) => {
     formCheckDiv.appendChild(getLatestButton);
 
     if (solution?.migratorPath != null) {
-      const updateDbButton = document.createElement("button"); 
-      updateDbButton.classList.add(
+      const updateDbEl = document.createElement("button"); 
+      updateDbEl.classList.add(
         "btn",
         "btn-warning",
         "ms-3",
         "btn-sm"
       );
-      updateDbButton.innerHTML='Update Db'
-      updateDbButton.onclick= () => openVisualStudioDebug(solution.migratorPath);
-      formCheckDiv.appendChild(updateDbButton);
+      updateDbEl.innerHTML='Update DB'
+      updateDbEl.onclick = () => updateDb(solution.migratorPath);
+      formCheckDiv.appendChild(updateDbEl);
     }
-    // Append the form-check div to the solutions container
     solutionsContainer.appendChild(formCheckDiv);
 
     const hr = document.createElement("hr");
     hr.classList.add("my-1");
-    // Add a line break for spacing
     solutionsContainer.appendChild(hr);
   });
 });
 
-// Function to perform Git operations (dummy function for demonstration)
 function getLatest(solutionPath) {
   electron.ipcRenderer.send("get-latest", solutionPath);
 
-  // Optionally, handle the result when it's received
   electron.ipcRenderer.once("get-latest-result", (result) => {
     if (result.success) {
       console.log("Get Latest successful:", result.output);
       showNotification('Get Latest Successful', result.output,'success');
     } else {
-      // console.error("Error getting latest:", result.error);
       showNotification("Error getting latest:", result.error,'error');
     }
   });
 }
 
-function openVisualStudioDebug(path){
-  electron.ipcRenderer.send("launch-solution-without-debug",path);
+function updateDb(migratorPath){
+  electron.ipcRenderer.send("update-db", migratorPath);
+  
 }
 
 function launchSelectedSolutions() {

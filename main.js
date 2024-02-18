@@ -19,27 +19,45 @@ app.whenReady().then(() => {
 });
 
 ipcMain.on("launch-solutions", (event, selectedSolutions) => {
-  selectedSolutions.forEach((solution) => {
-    launchVisualStudioSolution(solution, false);
+  selectedSolutions.forEach((path) => {
+    launchVisualStudioSolution(path);
   });
 });
 
-ipcMain.on("launch-solution-without-debug", (event, path) => {
-  launchVisualStudioSolution(path, true);
+ipcMain.on("update-db", (event, migratorPath) => {
+  const args = ['run'];
+  args.push(`--project`, migratorPath);
+
+  const options = { windowsHide: false };
+  const child = spawn("dotnet", args, options);
+  
+  
+  child.stdout.on("data", (data) => {
+    console.log(`stdout: ${data}`);
+  });
+
+  child.stderr.on("data", (data) => {
+    console.error(`stderr: ${data}`);
+  });
+
+  child.on("close", (code) => {
+    console.log(`Child process exited with code ${code}`);
+  });
+
+  child.on("error", (err) => {
+    console.error("Error Runing Migration:", err);
+  });
 });
 
-function launchVisualStudioSolution(solutionPath, isDebugMode) {
+function launchVisualStudioSolution(solutionPath) {
   const devenvPath =
     "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe";
   if (fs.existsSync(devenvPath)) {
-    
     const args = [solutionPath];
-    if (isDebugMode) {
-      const withoutDebugConfig = "Debug.StartWithoutDebugging";
-      args.push(`/Command`, withoutDebugConfig);
-    }
+    const withoutDebugConfig = "Debug.StartWithoutDebugging";
+    args.push(`/Command`, withoutDebugConfig);
 
-    const options = { windowsHide: false }; 
+    const options = { windowsHide: false };
     const child = spawn("devenv", args, options);
 
     child.stdout.on("data", (data) => {
