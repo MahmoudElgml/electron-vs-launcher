@@ -3,7 +3,7 @@
         {
             "name": "APG Membership",
             "path": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\APGMembership.sln",
-            "migratorPath":"D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\src\\APGMembership.MigrationTools\\APGMembership.MigrationTools.csproj"
+            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\src\\APGMembership.MigrationTools\\APGMembership.MigrationTools.csproj"
         },
         {
             "name": "APG Portal API Gateway",
@@ -12,7 +12,7 @@
         {
             "name": "APG Fundamental",
             "path": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\APGFundamentals.sln",
-            "migratorPath":"D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\src\\APGFundamental.MigrationTools\\APGFundamental.MigrationTools.csproj"
+            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\src\\APGFundamental.MigrationTools\\APGFundamental.MigrationTools.csproj"
         },
         {
             "name": "APG Transaction",
@@ -40,6 +40,20 @@
             "name": "APG Notification",
             "path": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\APGNotifications.sln",
             "migratorPath": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\src\\APGNotification.MigrationTools\\APGNotification.MigrationTools.csproj"
+        },
+        {
+            "name": "AmwalSS Fundamental",
+            "path": "D:\\git-repos\\amwal-pay\\APG.SettlementSystem\\AmwalSettlementSystem.sln",
+            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.SettlementSystem\\src\\AmwalSettlementSystem.MigrationTools\\AmwalSettlementSystem.MigrationTools.csproj"
+        },
+        {
+            "name": "AmwalSS Membership",
+            "path": "D:\\git-repos\\amwal-pay\\APG.SettlementMembership\\APGSettlementMembership.sln",
+            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.SettlementMembership\\src\\APGSettlementMembership.MigrationTools\\APGSettlementMembership.MigrationTools.csproj"
+        },
+        {
+            "name": "AmwalSS Portal Gateway",
+            "path": "D:\\git-repos\\amwal-pay\\APG.SettlementPortalAPIGateway\\APGSettlementPortalAPIGateway.sln"
         }
     ]
 }
