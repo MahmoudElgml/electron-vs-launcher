@@ -43,17 +43,21 @@
         },
         {
             "name": "AmwalSS Fundamental",
-            "path": "D:\\git-repos\\amwal-pay\\APG.SettlementSystem\\AmwalSettlementSystem.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.SettlementSystem\\src\\AmwalSettlementSystem.MigrationTools\\AmwalSettlementSystem.MigrationTools.csproj"
+            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.Fundamental\\AmwalSSFundamental.sln",
+            "migratorPath": "D:\\git-repos\\amwal-pay\\AmwalSS.Fundamental\\src\\AmwalSSFundamental.MigrationTools\\AmwalSSFundamental.MigrationTools.csproj"
         },
         {
             "name": "AmwalSS Membership",
-            "path": "D:\\git-repos\\amwal-pay\\APG.SettlementMembership\\APGSettlementMembership.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.SettlementMembership\\src\\APGSettlementMembership.MigrationTools\\APGSettlementMembership.MigrationTools.csproj"
+            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.Membership\\AmwalSSMembership.sln",
+            "migratorPath": "D:\\git-repos\\amwal-pay\\AmwalSS.Membership\\src\\AmwalSSMembership.MigrationTools\\AmwalSSMembership.MigrationTools.csproj"
+        },
+        {
+            "name": "AmwalSS Log",
+            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.LogModulesAPIs\\AmwalSSLogs.sln"
         },
         {
             "name": "AmwalSS Portal Gateway",
-            "path": "D:\\git-repos\\amwal-pay\\APG.SettlementPortalAPIGateway\\APGSettlementPortalAPIGateway.sln"
+            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.PortalAPIGateway\\AmwalSSPortalAPIGateway.sln"
         }
     ]
 }
