@@ -13,6 +13,7 @@ const createWindow = () => {
   });
   win.loadFile("index.html");
 };
+
 app.whenReady().then(() => {
   ipcMain.handle("ping", () => "pong");
   createWindow();
@@ -29,7 +30,7 @@ ipcMain.on("update-db", (event, migratorPath) => {
   args.push(`--project`, migratorPath);
 
   const options = { shell: true, detached: true, stdio: "inherit" };
-  const child = spawn("cmd.exe", ["/k", "dotnet", ...args], options);
+  const child = spawn("dotnet", args, options); // No cmd.exe on Linux
 
   child.on("close", (code) => {
     console.log(`Child process exited with code ${code}`);
@@ -41,15 +42,12 @@ ipcMain.on("update-db", (event, migratorPath) => {
 });
 
 function launchVisualStudioSolution(solutionPath) {
-  const devenvPath =
-    "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe";
-  if (fs.existsSync(devenvPath)) {
+  const codePath = "/snap/bin/rider"; // Path to VS Code on Linux
+  if (fs.existsSync(codePath)) {
     const args = [solutionPath];
-    const withoutDebugConfig = "Debug.StartWithoutDebugging";
-    args.push(`/Command`, withoutDebugConfig);
 
     const options = { windowsHide: false };
-    const child = spawn("devenv", args, options);
+    const child = spawn(codePath, args, options);
 
     child.stdout.on("data", (data) => {
       console.log(`stdout: ${data}`);
@@ -64,10 +62,10 @@ function launchVisualStudioSolution(solutionPath) {
     });
 
     child.on("error", (err) => {
-      console.error("Error launching Visual Studio:", err);
+      console.error("Error launching VS Code:", err);
     });
   } else {
-    console.error("Visual Studio not found at the specified path.");
+    console.error("VS Code not found at the specified path.");
   }
 }
 
@@ -85,10 +83,11 @@ ipcMain.on("get-solutions", (event) => {
 });
 
 ipcMain.on("get-latest", (event, solutionPath) => {
-  let pathArray = solutionPath.split("\\");
+  let pathArray = solutionPath.split("/");
   let name = pathArray[pathArray.length - 1];
   pathArray.pop();
-  let pathWithoutFileName = pathArray.join("\\");
+  let pathWithoutFileName = pathArray.join("/");
+
   exec(
     `cd ${pathWithoutFileName} && git checkout master_dev && git pull`,
     (error, stdout, stderr) => {

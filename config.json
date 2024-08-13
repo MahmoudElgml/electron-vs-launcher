@@ -2,62 +2,62 @@
     "solutions": [
         {
             "name": "APG Membership",
-            "path": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\APGMembership.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\src\\APGMembership.MigrationTools\\APGMembership.MigrationTools.csproj"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.MembershipModulesAPIs/APGMembership.sln",
+            "migratorPath": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.MembershipModulesAPIs/src/APGMembership.MigrationTools/APGMembership.MigrationTools.csproj"
         },
         {
             "name": "APG Portal API Gateway",
-            "path": "D:\\git-repos\\amwal-pay\\APG.PortalAPIGateway\\APGPortalAPIGateway.sln"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.PortalAPIGateway/APGPortalAPIGateway.sln"
         },
         {
             "name": "APG Fundamental",
-            "path": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\APGFundamentals.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\src\\APGFundamental.MigrationTools\\APGFundamental.MigrationTools.csproj"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.FundamentalModulesAPIs/APGFundamentals.sln",
+            "migratorPath": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.FundamentalModulesAPIs/src/APGFundamental.MigrationTools/APGFundamental.MigrationTools.csproj"
         },
         {
             "name": "APG Transaction",
-            "path": "D:\\git-repos\\amwal-pay\\APG.TransactionModulesAPIs\\APGTransaction.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.TransactionModulesAPIs\\src\\APGTransactions.MigrationTools\\APGTransactions.MigrationTools.csproj"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.TransactionModulesAPIs/APGTransaction.sln",
+            "migratorPath": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.TransactionModulesAPIs/src/APGTransactions.MigrationTools/APGTransactions.MigrationTools.csproj"
         },
         {
             "name": "APG Log",
-            "path": "D:\\git-repos\\amwal-pay\\APG.LogModulesAPIs\\APGLogs.sln"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.LogModulesAPIs/APGLogs.sln"
         },
         {
             "name": "APG Smartbox API Gateway",
-            "path": "D:\\git-repos\\amwal-pay\\APG.SmartBoxAPIGateway\\APGSmartBoxAPIGateway.sln"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.SmartBoxAPIGateway/APGSmartBoxAPIGateway.sln"
         },
         {
             "name": "APG Execution",
-            "path": "D:\\git-repos\\amwal-pay\\APG.ExecutionModulesAPIs\\APGExecutions.sln"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.ExecutionModulesAPIs/APGExecutions.sln"
         },
         {
             "name": "APG Digital Integration",
-            "path": "D:\\git-repos\\amwal-pay\\APG.MPCSSIntegrationAPIs\\APGDigitalIntegration.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.MPCSSIntegrationAPIs\\src\\APGDigitalIntegration.MigrationTools\\APGDigitalIntegration.MigrationTools.csproj"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.MPCSSIntegrationAPIs/APGDigitalIntegration.sln",
+            "migratorPath": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.MPCSSIntegrationAPIs/src/APGDigitalIntegration.MigrationTools/APGDigitalIntegration.MigrationTools.csproj"
         },
         {
             "name": "APG Notification",
-            "path": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\APGNotifications.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\src\\APGNotification.MigrationTools\\APGNotification.MigrationTools.csproj"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.NotificationModulesAPIs/APGNotifications.sln",
+            "migratorPath": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/APG.NotificationModulesAPIs/src/APGNotification.MigrationTools/APGNotification.MigrationTools.csproj"
         },
         {
             "name": "AmwalSS Fundamental",
-            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.Fundamental\\AmwalSSFundamental.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\AmwalSS.Fundamental\\src\\AmwalSSFundamental.MigrationTools\\AmwalSSFundamental.MigrationTools.csproj"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/AmwalSS.Fundamental/AmwalSSFundamental.sln",
+            "migratorPath": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/AmwalSS.Fundamental/src/AmwalSSFundamental.MigrationTools/AmwalSSFundamental.MigrationTools.csproj"
         },
         {
             "name": "AmwalSS Membership",
-            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.Membership\\AmwalSSMembership.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\AmwalSS.Membership\\src\\AmwalSSMembership.MigrationTools\\AmwalSSMembership.MigrationTools.csproj"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/AmwalSS.Membership/AmwalSSMembership.sln",
+            "migratorPath": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/AmwalSS.Membership/src/AmwalSSMembership.MigrationTools/AmwalSSMembership.MigrationTools.csproj"
         },
         {
             "name": "AmwalSS Log",
-            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.LogModulesAPIs\\AmwalSSLogs.sln"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/AmwalSS.LogModulesAPIs/AmwalSSLogs.sln"
         },
         {
             "name": "AmwalSS Portal Gateway",
-            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.PortalAPIGateway\\AmwalSSPortalAPIGateway.sln"
+            "path": "/media/mahmoud/C8BE2934BE291D06/git-repos/amwal-pay/AmwalSS.PortalAPIGateway/AmwalSSPortalAPIGateway.sln"
         }
     ]
 }
