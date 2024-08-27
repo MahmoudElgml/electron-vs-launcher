@@ -1,63 +1,103 @@
 {
+    "rootPath": "D:\\git-repos\\amwal-pay\\",
     "solutions": [
         {
             "name": "APG Membership",
-            "path": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\APGMembership.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.MembershipModulesAPIs\\src\\APGMembership.MigrationTools\\APGMembership.MigrationTools.csproj"
+            "path": "APG.MembershipModulesAPIs\\APGMembership.sln",
+            "migratorPath": "APG.MembershipModulesAPIs\\src\\APGMembership.MigrationTools\\APGMembership.MigrationTools.csproj",
+            "dockerPort": "44389",
+            "dockerContextFolder": "APG.MembershipModulesAPIs",
+            "imageContainerName": "apg-membership"
         },
         {
             "name": "APG Portal API Gateway",
-            "path": "D:\\git-repos\\amwal-pay\\APG.PortalAPIGateway\\APGPortalAPIGateway.sln"
+            "path": "APG.PortalAPIGateway\\APGPortalAPIGateway.sln",
+            "dockerPort": "44359",
+            "dockerContextFolder": "APG.PortalAPIGateway",
+            "imageContainerName": "apg-portal-gateway"
         },
         {
             "name": "APG Fundamental",
-            "path": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\APGFundamentals.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.FundamentalModulesAPIs\\src\\APGFundamental.MigrationTools\\APGFundamental.MigrationTools.csproj"
+            "path": "APG.FundamentalModulesAPIs\\APGFundamentals.sln",
+            "migratorPath": "APG.FundamentalModulesAPIs\\src\\APGFundamental.MigrationTools\\APGFundamental.MigrationTools.csproj",
+            "dockerPort": "44390",
+            "dockerContextFolder": "APG.FundamentalModulesAPIs",
+            "imageContainerName": "apg-fundamental"
         },
         {
             "name": "APG Transaction",
-            "path": "D:\\git-repos\\amwal-pay\\APG.TransactionModulesAPIs\\APGTransaction.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.TransactionModulesAPIs\\src\\APGTransactions.MigrationTools\\APGTransactions.MigrationTools.csproj"
+            "path": "APG.TransactionModulesAPIs\\APGTransaction.sln",
+            "migratorPath": "APG.TransactionModulesAPIs\\src\\APGTransactions.MigrationTools\\APGTransactions.MigrationTools.csproj",
+            "dockerPort": "44387",
+            "dockerContextFolder": "APG.TransactionModulesAPIs",
+            "imageContainerName": "apg-transaction"
         },
         {
             "name": "APG Log",
-            "path": "D:\\git-repos\\amwal-pay\\APG.LogModulesAPIs\\APGLogs.sln"
+            "path": "APG.LogModulesAPIs\\APGLogs.sln",
+            "dockerPort": "44349",
+            "dockerContextFolder": "APG.LogModulesAPIs",
+            "imageContainerName": "apg-log"
         },
         {
             "name": "APG Smartbox API Gateway",
-            "path": "D:\\git-repos\\amwal-pay\\APG.SmartBoxAPIGateway\\APGSmartBoxAPIGateway.sln"
+            "path": "APG.SmartBoxAPIGateway\\APGSmartBoxAPIGateway.sln",
+            "dockerPort": "44357",
+            "dockerContextFolder": "APG.SmartBoxAPIGateway",
+            "imageContainerName": "apg-smartbox-gateway"
         },
         {
             "name": "APG Execution",
-            "path": "D:\\git-repos\\amwal-pay\\APG.ExecutionModulesAPIs\\APGExecutions.sln"
+            "path": "APG.ExecutionModulesAPIs\\APGExecutions.sln",
+            "dockerPort": "44310",
+            "dockerContextFolder": "APG.ExecutionModulesAPIs",
+            "imageContainerName": "apg-execution"
         },
         {
             "name": "APG Digital Integration",
-            "path": "D:\\git-repos\\amwal-pay\\APG.MPCSSIntegrationAPIs\\APGDigitalIntegration.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.MPCSSIntegrationAPIs\\src\\APGDigitalIntegration.MigrationTools\\APGDigitalIntegration.MigrationTools.csproj"
+            "path": "APG.MPCSSIntegrationAPIs\\APGDigitalIntegration.sln",
+            "migratorPath": "APG.MPCSSIntegrationAPIs\\src\\APGDigitalIntegration.MigrationTools\\APGDigitalIntegration.MigrationTools.csproj",
+            "dockerPort": "44392",
+            "dockerContextFolder": "APG.MPCSSIntegrationAPIs",
+            "imageContainerName": "apg-mpcss"
         },
         {
             "name": "APG Notification",
-            "path": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\APGNotifications.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\APG.NotificationModulesAPIs\\src\\APGNotification.MigrationTools\\APGNotification.MigrationTools.csproj"
+            "path": "APG.NotificationModulesAPIs\\APGNotifications.sln",
+            "migratorPath": "APG.NotificationModulesAPIs\\src\\APGNotification.MigrationTools\\APGNotification.MigrationTools.csproj",
+            "dockerPort": "44391",
+            "dockerContextFolder": "APG.NotificationModulesAPIs",
+            "imageContainerName": "apg-notification"
         },
         {
             "name": "AmwalSS Fundamental",
-            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.Fundamental\\AmwalSSFundamental.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\AmwalSS.Fundamental\\src\\AmwalSSFundamental.MigrationTools\\AmwalSSFundamental.MigrationTools.csproj"
+            "path": "AmwalSS.Fundamental\\AmwalSSFundamental.sln",
+            "migratorPath": "AmwalSS.Fundamental\\src\\AmwalSSFundamental.MigrationTools\\AmwalSSFundamental.MigrationTools.csproj",
+            "dockerPort": "44309",
+            "dockerContextFolder": "AmwalSS.Fundamental",
+            "imageContainerName": "amwalss-fundamental"
         },
         {
             "name": "AmwalSS Membership",
-            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.Membership\\AmwalSSMembership.sln",
-            "migratorPath": "D:\\git-repos\\amwal-pay\\AmwalSS.Membership\\src\\AmwalSSMembership.MigrationTools\\AmwalSSMembership.MigrationTools.csproj"
+            "path": "AmwalSS.Membership\\AmwalSSMembership.sln",
+            "migratorPath": "AmwalSS.Membership\\src\\AmwalSSMembership.MigrationTools\\AmwalSSMembership.MigrationTools.csproj",
+            "dockerPort": "44379",
+            "dockerContextFolder": "AmwalSS.Membership",
+            "imageContainerName": "amwalss-membership"
         },
         {
             "name": "AmwalSS Log",
-            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.LogModulesAPIs\\AmwalSSLogs.sln"
+            "path": "AmwalSS.LogModulesAPIs\\AmwalSSLogs.sln",
+            "dockerPort": "44350",
+            "dockerContextFolder": "AmwalSS.LogModulesAPIs",
+            "imageContainerName": "amwalss-log"
         },
         {
             "name": "AmwalSS Portal Gateway",
-            "path": "D:\\git-repos\\amwal-pay\\AmwalSS.PortalAPIGateway\\AmwalSSPortalAPIGateway.sln"
+            "path": "AmwalSS.PortalAPIGateway\\AmwalSSPortalAPIGateway.sln",
+            "dockerPort": "44358",
+            "dockerContextFolder": "AmwalSS.PortalAPIGateway",
+            "imageContainerName": "amwalss-portal-gateway"
         }
     ]
 }

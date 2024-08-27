@@ -66,11 +66,13 @@ function launchVisualStudioSolution(solutionPath) {
   }
 }
 
-function getLatest(solutionPath) {
+function getLatest(solutionPath,rootPath) {
   let pathArray = solutionPath.split("\\");
   let name = pathArray[pathArray.length - 1];
   pathArray.pop();
   let pathWithoutFileName = pathArray.join("\\");
+
+  pathWithoutFileName=path.join(rootPath, pathWithoutFileName)
   exec(
     `cd ${pathWithoutFileName} && git checkout master_dev && git pull`,
     (error, stdout, stderr) => {
@@ -123,14 +125,12 @@ function updateDb(migratorPath) {
   });
 }
 
-function loadSolutionsFromConfig(solutions) {
+function loadSolutionsFromConfig(solutions,rootPath) {
   const solutionsContainer = document.getElementById("solutionsContainer");
 
-  // Create the table and add Bootstrap classes
   const table = document.createElement("table");
   table.classList.add("table", "table-striped", "table-hover", "align-middle");
 
-  // Create the table header
   const thead = document.createElement("thead");
   const headerRow = document.createElement("tr");
 
@@ -144,20 +144,17 @@ function loadSolutionsFromConfig(solutions) {
   headerRow.appendChild(actionsHeader);
   thead.appendChild(headerRow);
 
-  // Create the table body
   const tbody = document.createElement("tbody");
 
   solutions.forEach((solution) => {
-    // Create a table row
     const row = document.createElement("tr");
 
-    // Create the checkbox column
     const checkboxTd = document.createElement("td");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.classList.add("form-check-input");
-    checkbox.id = solution.name.replace(/\s/g, ""); // Use this as a unique identifier
-    checkbox.value = solution.path;
+    checkbox.id = solution.name.replace(/\s/g, "");
+    checkbox.value = path.join(rootPath, solution.path);
 
     const label = document.createElement("label");
     label.classList.add("form-check-label", "ms-2");
@@ -167,15 +164,12 @@ function loadSolutionsFromConfig(solutions) {
     checkboxTd.appendChild(checkbox);
     checkboxTd.appendChild(label);
 
-    // Create the actions column
     const actionsTd = document.createElement("td");
 
-    // Create "Get Latest" button with icon
     const getLatestButton = document.createElement("button");
     getLatestButton.classList.add("btn", "btn-secondary", "btn-sm", "me-2");
-    getLatestButton.innerHTML =
-      '<i class="fa fa-solid fa-download" data-toggle="tooltip" data-placement="top" title="Get Latest"></i>';
-    getLatestButton.onclick = () => getLatest(solution.path);
+    getLatestButton.innerHTML = '<i class="fa fa-solid fa-download"></i>';
+    getLatestButton.onclick = () => getLatest(solution.path,rootPath);
 
     actionsTd.appendChild(getLatestButton);
 
@@ -183,24 +177,58 @@ function loadSolutionsFromConfig(solutions) {
       const updateDbEl = document.createElement("button");
       updateDbEl.classList.add("btn", "btn-warning", "btn-sm", "ms-1");
       updateDbEl.textContent = "Update DB";
-      updateDbEl.onclick = () => updateDb(solution.migratorPath);
+      updateDbEl.onclick = () => updateDb(path.join(rootPath, solution.migratorPath));
       actionsTd.appendChild(updateDbEl);
     }
 
-    // Append the columns to the row
+    // Add Dockerize button
+    const dockerizeButton = document.createElement("button");
+    dockerizeButton.classList.add("btn", "btn-primary", "btn-sm", "ms-1");
+    dockerizeButton.textContent = "Dockerize";
+    dockerizeButton.onclick = () => dockerizeApp(solution,rootPath);
+
+    actionsTd.appendChild(dockerizeButton);
+
     row.appendChild(checkboxTd);
     row.appendChild(actionsTd);
 
-    // Append the row to the table body
     tbody.appendChild(row);
   });
 
-  // Append the thead and tbody to the table
   table.appendChild(thead);
   table.appendChild(tbody);
 
-  // Append the table to the container
   solutionsContainer.appendChild(table);
+}
+
+function dockerizeApp(solution, rootPath) {
+  const dockerFilePath = path.join(rootPath, solution.dockerContextFolder, "dev-dockerfile");
+  const dockerBuildCommand = `docker build -t ${solution.imageContainerName} -f ${dockerFilePath} ${path.join(rootPath, solution.dockerContextFolder)}`;
+  const dockerRunCommand = `docker run -d -p ${solution.dockerPort}:${solution.dockerPort} --name ${solution.imageContainerName} ${solution.imageContainerName}`;
+
+  // Open a new shell and run the build command
+  const buildProcess = spawn('cmd.exe', ['/c', dockerBuildCommand], { stdio: 'inherit' });
+
+  buildProcess.on('close', (code) => {
+    if (code !== 0) {
+      console.error(`Error building Docker image for ${solution.name}. Exit code: ${code}`);
+      return;
+    }
+
+    console.log(`Docker image built for ${solution.name}.`);
+
+    // Open a new shell and run the container
+    const runProcess = spawn('cmd.exe', ['/c', dockerRunCommand], { stdio: 'inherit' });
+
+    runProcess.on('close', (code) => {
+      if (code !== 0) {
+        console.error(`Error running Docker container for ${solution.name}. Exit code: ${code}`);
+        return;
+      }
+
+      console.log(`Docker container running for ${solution.name}.`);
+    });
+  });
 }
 
 function loadSolutions() {
@@ -211,7 +239,7 @@ function loadSolutions() {
       return;
     }
     const config = JSON.parse(data);
-    loadSolutionsFromConfig(config.solutions);
+    loadSolutionsFromConfig(config.solutions, config.rootPath);
   });
 }
 
