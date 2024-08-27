@@ -203,11 +203,12 @@ function loadSolutionsFromConfig(solutions,rootPath) {
 
 function dockerizeApp(solution, rootPath) {
   const dockerFilePath = path.join(rootPath, solution.dockerContextFolder, "dev-dockerfile");
-  const dockerBuildCommand = `docker build -t ${solution.imageContainerName} -f ${dockerFilePath} ${path.join(rootPath, solution.dockerContextFolder)}`;
+  const dockerBuildCommand = `docker buildx build --pull --rm -t ${solution.imageContainerName}:latest -f ${dockerFilePath} ${path.join(rootPath, solution.dockerContextFolder)}`;
   const dockerRunCommand = `docker run -d -p ${solution.dockerPort}:${solution.dockerPort} --name ${solution.imageContainerName} ${solution.imageContainerName}`;
+  const dockerPruneCommand = `docker image prune -f`;
 
-  // Open a new shell and run the build command
-  const buildProcess = spawn('cmd.exe', ['/c', dockerBuildCommand], { stdio: 'inherit' });
+  const buildOptions = { shell: true, detached: true, stdio: 'inherit' };
+  const buildProcess = spawn('cmd.exe', ['/k', dockerBuildCommand], buildOptions);
 
   buildProcess.on('close', (code) => {
     if (code !== 0) {
@@ -217,8 +218,7 @@ function dockerizeApp(solution, rootPath) {
 
     console.log(`Docker image built for ${solution.name}.`);
 
-    // Open a new shell and run the container
-    const runProcess = spawn('cmd.exe', ['/c', dockerRunCommand], { stdio: 'inherit' });
+    const runProcess = spawn('cmd.exe', ['/k', dockerRunCommand], buildOptions);
 
     runProcess.on('close', (code) => {
       if (code !== 0) {
@@ -227,9 +227,22 @@ function dockerizeApp(solution, rootPath) {
       }
 
       console.log(`Docker container running for ${solution.name}.`);
+
+      const pruneProcess = spawn('cmd.exe', ['/k', dockerPruneCommand], buildOptions);
+
+      pruneProcess.on('close', (code) => {
+        if (code !== 0) {
+          console.error(`Error removing dangling images. Exit code: ${code}`);
+          return;
+        }
+
+        console.log(`Dangling images removed.`);
+      });
     });
   });
 }
+
+
 
 function loadSolutions() {
   const configPath = path.join(__dirname, "config.json");
