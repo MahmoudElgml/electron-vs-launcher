@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { exec, spawn } = require("child_process");
-
+const rootPathGlobal=''
 document
   .getElementById("launchBtn")
   .addEventListener("click", launchSelectedSolutions);
@@ -9,17 +9,23 @@ document.getElementById("clearBtn").addEventListener("click", clearSelections);
 document
   .getElementById("selectAllBtn")
   .addEventListener("click", selectAllCheckboxes);
+document.getElementById('get-latest-selected').addEventListener('click', getLatestFromSelected);
 
 function launchSelectedSolutions() {
-  const selectedSolutions = [];
-
   document
     .querySelectorAll('input[type="checkbox"]:checked')
     .forEach((checkbox) => {
       launchVisualStudioSolution(checkbox.value);
     });
+}
 
-  electron.ipcRenderer.send("launch-solutions", selectedSolutions);
+function getLatestFromSelected() {
+  document
+  .querySelectorAll('input[type="checkbox"]:checked')
+  .forEach((checkbox) => {
+    getLatest(checkbox.value,rootPathGlobal);
+
+  });
 }
 
 function clearSelections() {
@@ -202,8 +208,8 @@ function loadSolutionsFromConfig(solutions,rootPath) {
 }
 
 function dockerizeApp(solution, rootPath) {
-  const dockerFilePath = path.join(rootPath, solution.dockerContextFolder, "dev-dockerfile");
-  const dockerBuildCommand = `docker buildx build --pull --rm -t ${solution.imageContainerName}:latest -f ${dockerFilePath} ${path.join(rootPath, solution.dockerContextFolder)}`;
+  const dockerFilePath = path.join(rootPath, solution.contextFolder, "dev-dockerfile");
+  const dockerBuildCommand = `docker buildx build --pull --rm -t ${solution.imageContainerName}:latest -f ${dockerFilePath} ${path.join(rootPath, solution.contextFolder)}`;
   const dockerRunCommand = `docker run -d -p ${solution.dockerPort}:${solution.dockerPort} --name ${solution.imageContainerName} ${solution.imageContainerName}`;
   const dockerPruneCommand = `docker image prune -f`;
 
@@ -252,6 +258,7 @@ function loadSolutions() {
       return;
     }
     const config = JSON.parse(data);
+    this.rootPathGlobal=config.rootPath
     loadSolutionsFromConfig(config.solutions, config.rootPath);
   });
 }
