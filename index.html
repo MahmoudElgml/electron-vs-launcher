@@ -24,23 +24,25 @@
   <body>
     <main>
       <div class="container mt-5">
-        <div clas="row mb-5">
-          <button class="btn btn-secondary me-2" id="clearBtn">
+        <div clas="row mb-5 gap-2">
+          <button class="btn btn-secondary" id="clearBtn">
             Reset Selections
           </button>
-          <button class="btn btn-primary mx-2" id="selectAllBtn">
+          <button class="btn btn-primary" id="selectAllBtn">
             Select All
+          </button>
+
+          <button class="btn btn-success" id="launchBtn">
+            Run Selected Solutions
+          </button>
+  
+          <button class="btn btn-success"  id="get-latest-selected">
+            Get Latest For Selected
           </button>
         </div>
 
         <div id="solutionsContainer" class="mt-3"></div>
-        <button class="btn btn-success mt-2" id="launchBtn">
-          Run Selected Solutions
-        </button>
 
-        <button class="btn btn-success mt-2"  id="get-latest-selected">
-          Get Latest For Selected
-        </button>
       </div>
     </main>
   </body>
