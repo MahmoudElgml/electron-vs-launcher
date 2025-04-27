@@ -42,15 +42,13 @@ function selectAllCheckboxes() {
 }
 
 function launchVisualStudioSolution(solutionPath) {
-  const devenvPath =
-    "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\devenv.exe";
-  if (fs.existsSync(devenvPath)) {
+  // Use rider command line tool on Mac
+  const riderPath = "/usr/local/bin/rider";
+  if (fs.existsSync(riderPath)) {
     const args = [solutionPath];
-    const withoutDebugConfig = "Debug.StartWithoutDebugging";
-    args.push(`/Command`, withoutDebugConfig);
-
+    
     const options = { windowsHide: false };
-    const child = spawn("devenv", args, options);
+    const child = spawn(riderPath, args, options);
 
     child.stdout.on("data", (data) => {
       console.log(`stdout: ${data}`);
@@ -65,22 +63,22 @@ function launchVisualStudioSolution(solutionPath) {
     });
 
     child.on("error", (err) => {
-      console.error("Error launching Visual Studio:", err);
+      console.error("Error launching Rider:", err);
     });
   } else {
-    console.error("Visual Studio not found at the specified path.");
+    console.error("Rider not found at the specified path.");
   }
 }
 
-function getLatest(solutionPath,rootPath) {
-  let pathArray = solutionPath.split("\\");
+function getLatest(solutionPath, rootPath) {
+  let pathArray = solutionPath.split("/");
   let name = pathArray[pathArray.length - 1];
   pathArray.pop();
-  let pathWithoutFileName = pathArray.join("\\");
+  let pathWithoutFileName = pathArray.join("/");
 
-  pathWithoutFileName=path.join(rootPath, pathWithoutFileName)
+  pathWithoutFileName = path.join(rootPath, pathWithoutFileName);
   exec(
-    `cd ${pathWithoutFileName} && git checkout master_dev && git pull`,
+    `cd "${pathWithoutFileName}" && git checkout master_dev && git pull`,
     (error, stdout, stderr) => {
       if (error) {
         showNotification(
@@ -120,7 +118,7 @@ function updateDb(migratorPath) {
   args.push(`--project`, migratorPath);
 
   const options = { shell: true, detached: true, stdio: "inherit" };
-  const child = spawn("cmd.exe", ["/k", "dotnet", ...args], options);
+  const child = spawn("dotnet", args, options);
 
   child.on("close", (code) => {
     console.log(`Child process exited with code ${code}`);
@@ -213,8 +211,8 @@ function dockerizeApp(solution, rootPath) {
   const dockerRunCommand = `docker run -d -p ${solution.dockerPort}:${solution.dockerPort} --name ${solution.imageContainerName} ${solution.imageContainerName}`;
   const dockerPruneCommand = `docker image prune -f`;
 
-  const buildOptions = { shell: true, detached: true, stdio: 'inherit' };
-  const buildProcess = spawn('cmd.exe', ['/k', dockerBuildCommand], buildOptions);
+  const buildOptions = { shell: true, stdio: 'inherit' };
+  const buildProcess = spawn('/bin/bash', ['-c', dockerBuildCommand], buildOptions);
 
   buildProcess.on('close', (code) => {
     if (code !== 0) {
@@ -224,7 +222,7 @@ function dockerizeApp(solution, rootPath) {
 
     console.log(`Docker image built for ${solution.name}.`);
 
-    const runProcess = spawn('cmd.exe', ['/k', dockerRunCommand], buildOptions);
+    const runProcess = spawn('/bin/bash', ['-c', dockerRunCommand], buildOptions);
 
     runProcess.on('close', (code) => {
       if (code !== 0) {
@@ -234,7 +232,7 @@ function dockerizeApp(solution, rootPath) {
 
       console.log(`Docker container running for ${solution.name}.`);
 
-      const pruneProcess = spawn('cmd.exe', ['/k', dockerPruneCommand], buildOptions);
+      const pruneProcess = spawn('/bin/bash', ['-c', dockerPruneCommand], buildOptions);
 
       pruneProcess.on('close', (code) => {
         if (code !== 0) {
@@ -247,8 +245,6 @@ function dockerizeApp(solution, rootPath) {
     });
   });
 }
-
-
 
 function loadSolutions() {
   const configPath = path.join(__dirname, "config.json");
