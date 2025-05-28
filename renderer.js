@@ -12,13 +12,20 @@ document
 document.getElementById('get-latest-selected').addEventListener('click', getLatestFromSelected);
 
 function launchSelectedSolutions() {
+  warmUpRider();
+  setTimeout(() => {
+    launchSelectedSolutionsAfterWarmUp();
+  }
+  , 5000);
+}
+
+function launchSelectedSolutionsAfterWarmUp() {
   document
     .querySelectorAll('input[type="checkbox"]:checked')
     .forEach((checkbox) => {
       launchVisualStudioSolution(checkbox.value);
     });
 }
-
 function getLatestFromSelected() {
   document
   .querySelectorAll('input[type="checkbox"]:checked')
@@ -26,6 +33,17 @@ function getLatestFromSelected() {
     getLatest(checkbox.value,rootPathGlobal);
 
   });
+}
+
+
+function warmUpRider() {
+  const riderPath = "/Applications/Rider.app/Contents/MacOS/rider";
+
+  const child = spawn(riderPath, {
+    detached: true,
+    stdio: "ignore"
+  });
+  child.unref();
 }
 
 function clearSelections() {
