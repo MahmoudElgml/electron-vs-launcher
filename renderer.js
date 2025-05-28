@@ -43,7 +43,7 @@ function selectAllCheckboxes() {
 
 function launchVisualStudioSolution(solutionPath) {
   // Use rider command line tool on Mac
-  const riderPath = "/usr/local/bin/rider";
+  const riderPath = "/Applications/Rider.app/Contents/MacOS/rider";
   if (fs.existsSync(riderPath)) {
     const args = [solutionPath];
     
@@ -118,7 +118,8 @@ function updateDb(migratorPath) {
   args.push(`--project`, migratorPath);
 
   const options = { shell: true, detached: true, stdio: "inherit" };
-  const child = spawn("dotnet", args, options);
+  const dotnetPath = '/usr/local/share/dotnet/dotnet';
+  const child = spawn(dotnetPath, args, options);
 
   child.on("close", (code) => {
     console.log(`Child process exited with code ${code}`);
