@@ -4,28 +4,80 @@ const { exec, spawn } = require("child_process");
 const rootPathGlobal=''
 document
   .getElementById("launchBtn")
-  .addEventListener("click", launchSelectedSolutions);
+  .addEventListener("click", launchSelectedSolutionsSafely);
 document.getElementById("clearBtn").addEventListener("click", clearSelections);
 document
   .getElementById("selectAllBtn")
   .addEventListener("click", selectAllCheckboxes);
 document.getElementById('get-latest-selected').addEventListener('click', getLatestFromSelected);
 
-function launchSelectedSolutions() {
-  warmUpRider();
-  setTimeout(() => {
-    launchSelectedSolutionsAfterWarmUp();
-  }
-  , 5000);
+const riderPath = "/Applications/Rider.app/Contents/MacOS/rider";
+
+// Check if Rider is already running
+function isRiderRunning(callback) {
+  const ps = spawn("pgrep", ["-f", "Rider"]);
+  ps.on("close", (code) => {
+    callback(code === 0); // 0 = found process
+  });
 }
 
-function launchSelectedSolutionsAfterWarmUp() {
+// Launch Rider without a project to ensure it's initialized
+function preWarmRider() {
+  const child = spawn(riderPath, {
+    detached: true,
+    stdio: "ignore"
+  });
+  child.unref();
+}
+
+// Launch a single solution in Rider
+function launchSolution(solutionPath) {
+  if (!fs.existsSync(solutionPath)) {
+    console.error(`Solution path does not exist: ${solutionPath}`);
+    return;
+  }
+
+  const args = [solutionPath];
+
+  const options = {
+    detached: true,
+    stdio: "ignore"
+  };
+
+  const child = spawn(riderPath, args, options);
+  child.unref();
+
+  console.log(`Launched Rider for: ${solutionPath}`);
+}
+
+// Launch selected checkboxes
+function launchSelectedSolutions() {
   document
     .querySelectorAll('input[type="checkbox"]:checked')
     .forEach((checkbox) => {
-      launchVisualStudioSolution(checkbox.value);
+      launchSolution(checkbox.value);
     });
 }
+
+// Entry point — ensures Rider is warmed before launching projects
+function launchSelectedSolutionsSafely() {
+  isRiderRunning((running) => {
+    if (!running) {
+      console.log("Rider is not running. Launching in background...");
+      preWarmRider();
+
+      // Wait 3 seconds to allow it to boot up before launching solutions
+      setTimeout(() => {
+        launchSelectedSolutions();
+      }, 3000);
+    } else {
+      console.log("Rider is already running. Launching solutions immediately.");
+      launchSelectedSolutions();
+    }
+  });
+}
+
+
 function getLatestFromSelected() {
   document
   .querySelectorAll('input[type="checkbox"]:checked')
