@@ -183,20 +183,53 @@ function showNotification(title, message, state) {
   };
 }
 
-function updateDb(migratorPath) {
-  const args = ["run"];
-  args.push(`--project`, migratorPath);
+function updateDb(migratorRelativePath) {
+  const dotnetPath = "/usr/local/share/dotnet/dotnet";
 
-  const options = { shell: true, detached: true, stdio: "inherit" };
-  const dotnetPath = '/usr/local/share/dotnet/dotnet';
+  // Resolve full absolute path to the .csproj
+  const migratorProjectPath = path.resolve(__dirname, migratorRelativePath);
+
+  // Validate that dotnet is a valid file
+  if (!fs.existsSync(dotnetPath) || fs.lstatSync(dotnetPath).isDirectory()) {
+    console.error("❌ Invalid dotnet path: not a file or does not exist");
+    return;
+  }
+
+  // Validate that the .csproj file exists
+  if (!fs.existsSync(migratorProjectPath) || fs.lstatSync(migratorProjectPath).isDirectory()) {
+    console.error("❌ Invalid migrator project path. Expected a .csproj file.");
+    return;
+  }
+
+  const args = ["run", "--project", migratorProjectPath];
+  const options = { shell: true };
+
   const child = spawn(dotnetPath, args, options);
 
+  child.stdout.on("data", (data) => {
+
+    const outputBoxElement = document.getElementById("outputBox");
+
+    if (outputBoxElement) {
+      const lines = outputBoxElement.innerHTML.split(/<\/p>/).filter(line => line.trim().length > 0).map(line => line + "</p>");
+      const lastThree = lines.slice(-50).join('');
+      outputBoxElement.innerHTML = lastThree + `<p class="p-0 m-0">${data.toString()}</p>`;
+      outputBoxElement.scrollTop = outputBoxElement.scrollHeight; // Scroll to the bottom
+    }
+    console.log(`🟢 stdout: ${data.toString()}`);
+
+  });
+
+  child.stderr.on("data", (data) => {
+    console.error(`🔴 stderr: ${data.toString()}`);
+  });
+
   child.on("close", (code) => {
-    console.log(`Child process exited with code ${code}`);
+      console.log(`⚙️ Child process exited with code ${code}`);
   });
 
   child.on("error", (err) => {
-    console.error("Error Running Migration:", err);
+    console.error(`🔴 error: ${err.message}`);
   });
 }
 

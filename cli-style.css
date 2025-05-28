@@ -1,0 +1,16 @@
+.cli-output {
+  background-color: #1e1e1e;
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  padding:  0 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #000;
+  overflow-y: auto;
+  overflow-x: auto;
+  max-height: 200px;
+  font-size: 14px;
+}
+
+.cli-output  p{
+    white-space: break-spaces;
+}
