@@ -3,7 +3,8 @@
     "solutions": [
         {
             "name": "APG Membership",
-            "path": "APG.MembershipModulesAPIs/APGMembership.sln",
+            "solutionPath": "APG.MembershipModulesAPIs/APGMembership.sln",
+            "startupProject":"APG.MembershipModulesAPIs/src/APGMembership.Services.Api/APGMembership.Services.Api.csproj",
             "migratorPath": "APG.MembershipModulesAPIs/src/APGMembership.MigrationTools/APGMembership.MigrationTools.csproj",
             "dockerPort": "44389",
             "contextFolder": "APG.MembershipModulesAPIs",
@@ -11,14 +12,16 @@
         },
         {
             "name": "APG Portal API Gateway",
-            "path": "APG.PortalAPIGateway/APGPortalAPIGateway.sln",
+            "startupProject" : "/APG.PortalAPIGateway/APGPortalAPIs/APGPortalAPIs.csproj",
+            "solutionPath": "APG.PortalAPIGateway/APGPortalAPIGateway.sln",
             "dockerPort": "44359",
             "contextFolder": "APG.PortalAPIGateway",
             "imageContainerName": "apg-portal-gateway"
         },
         {
             "name": "APG Fundamental",
-            "path": "APG.FundamentalModulesAPIs/APGFundamentals.sln",
+            "startupProject":"APG.FundamentalModulesAPIs/src/APGFundamentals.Services.Api/APGFundamentals.Services.Api.csproj",
+            "solutionPath": "APG.FundamentalModulesAPIs/APGFundamentals.sln",
             "migratorPath": "APG.FundamentalModulesAPIs/src/APGFundamental.MigrationTools/APGFundamental.MigrationTools.csproj",
             "dockerPort": "44390",
             "contextFolder": "APG.FundamentalModulesAPIs",
@@ -26,7 +29,8 @@
         },
         {
             "name": "APG Transaction",
-            "path": "APG.TransactionModulesAPIs/APGTransaction.sln",
+            "startupProject":"APG.TransactionModulesAPIs/src/APGTransaction.Services.Api/APGTransaction.Services.Api.csproj",
+            "solutionPath": "APG.TransactionModulesAPIs/APGTransaction.sln",
             "migratorPath": "APG.TransactionModulesAPIs/src/APGTransactions.MigrationTools/APGTransactions.MigrationTools.csproj",
             "dockerPort": "44387",
             "contextFolder": "APG.TransactionModulesAPIs",
@@ -34,28 +38,32 @@
         },
         {
             "name": "APG Log",
-            "path": "APG.LogModulesAPIs/APGLogs.sln",
+            "startupProject":"APG.LogModulesAPIs/src/APGLogs.Services.Api/APGLogs.Services.Api.csproj",
+            "solutionPath": "APG.LogModulesAPIs/APGLogs.sln",
             "dockerPort": "44349",
             "contextFolder": "APG.LogModulesAPIs",
             "imageContainerName": "apg-log"
         },
         {
             "name": "APG Smartbox API Gateway",
-            "path": "APG.SmartBoxAPIGateway/APGSmartBoxAPIGateway.sln",
+            "startupProject":"APG.SmartBoxAPIGateway/APGSmartBoxAPIs/APGSmartBoxAPIs.csproj",
+            "solutionPath": "APG.SmartBoxAPIGateway/APGSmartBoxAPIGateway.sln",
             "dockerPort": "44357",
             "contextFolder": "APG.SmartBoxAPIGateway",
             "imageContainerName": "apg-smartbox-gateway"
         },
         {
             "name": "APG Execution",
-            "path": "APG.ExecutionModulesAPIs/APGExecutions.sln",
+            "startupProject":"APG.ExecutionModulesAPIs/src/APGExecutions.Services.Api/APGExecutions.Services.Api.csproj",
+            "solutionPath": "APG.ExecutionModulesAPIs/APGExecutions.sln",
             "dockerPort": "44310",
             "contextFolder": "APG.ExecutionModulesAPIs",
             "imageContainerName": "apg-execution"
         },
         {
             "name": "APG Digital Integration",
-            "path": "APG.MPCSSIntegrationAPIs/APGDigitalIntegration.sln",
+            "startupProject":"APG.MPCSSIntegrationAPIs/src/APGMPCSSIntegration.Services.Api/APGDigitalIntegration.Services.Api.csproj",
+            "solutionPath": "APG.MPCSSIntegrationAPIs/APGDigitalIntegration.sln",
             "migratorPath": "APG.MPCSSIntegrationAPIs/src/APGDigitalIntegration.MigrationTools/APGDigitalIntegration.MigrationTools.csproj",
             "dockerPort": "44392",
             "contextFolder": "APG.MPCSSIntegrationAPIs",
@@ -63,7 +71,8 @@
         },
         {
             "name": "APG Notification",
-            "path": "APG.NotificationModulesAPIs/APGNotifications.sln",
+            "startupProject":"APG.NotificationModulesAPIs/src/APGNotifications.Application/APGNotifications.Application.csproj",
+            "solutionPath": "APG.NotificationModulesAPIs/APGNotifications.sln",
             "migratorPath": "APG.NotificationModulesAPIs/src/APGNotification.MigrationTools/APGNotification.MigrationTools.csproj",
             "dockerPort": "44391",
             "contextFolder": "APG.NotificationModulesAPIs",
@@ -71,7 +80,8 @@
         },
         {
             "name": "AmwalSS Fundamental",
-            "path": "AmwalSS.Fundamental/AmwalSSFundamental.sln",
+            "startupProject":"",
+            "solutionPath": "AmwalSS.Fundamental/AmwalSSFundamental.sln",
             "migratorPath": "AmwalSS.Fundamental/src/AmwalSSFundamental.MigrationTools/AmwalSSFundamental.MigrationTools.csproj",
             "dockerPort": "44309",
             "contextFolder": "AmwalSS.Fundamental",
@@ -79,7 +89,8 @@
         },
         {
             "name": "AmwalSS Membership",
-            "path": "AmwalSS.Membership/AmwalSSMembership.sln",
+            "startupProject":"",
+            "solutionPath": "AmwalSS.Membership/AmwalSSMembership.sln",
             "migratorPath": "AmwalSS.Membership/src/AmwalSSMembership.MigrationTools/AmwalSSMembership.MigrationTools.csproj",
             "dockerPort": "44379",
             "contextFolder": "AmwalSS.Membership",
@@ -87,14 +98,16 @@
         },
         {
             "name": "AmwalSS Log",
-            "path": "AmwalSS.LogModulesAPIs/AmwalSSLogs.sln",
+            "startupProject":"",
+            "solutionPath": "AmwalSS.LogModulesAPIs/AmwalSSLogs.sln",
             "dockerPort": "44350",
             "contextFolder": "AmwalSS.LogModulesAPIs",
             "imageContainerName": "amwalss-log"
         },
         {
             "name": "AmwalSS Portal Gateway",
-            "path": "AmwalSS.PortalAPIGateway/AmwalSSPortalAPIGateway.sln",
+            "startupProject":"",
+            "solutionPath": "AmwalSS.PortalAPIGateway/AmwalSSPortalAPIGateway.sln",
             "dockerPort": "44358",
             "contextFolder": "AmwalSS.PortalAPIGateway",
             "imageContainerName": "amwalss-portal-gateway"

@@ -3,8 +3,14 @@ const path = require("path");
 const { exec, spawn } = require("child_process");
 const rootPathGlobal=''
 document
-  .getElementById("launchBtn")
+  .getElementById("launchBtnForIDE")
   .addEventListener("click", launchSelectedSolutionsSafely);
+
+  document
+  .getElementById("launchBtnForCLI")
+  .addEventListener("click", launchSelectedSolutionsOnCLI);
+
+
 document.getElementById("clearBtn").addEventListener("click", clearSelections);
 document
   .getElementById("selectAllBtn")
@@ -56,6 +62,16 @@ function launchSelectedSolutions() {
     .querySelectorAll('input[type="checkbox"]:checked')
     .forEach((checkbox) => {
       launchSolution(checkbox.value);
+    });
+}
+
+
+// Launch selected checkboxes
+function launchSelectedSolutionsOnCLI() {
+  document
+    .querySelectorAll('input[type="checkbox"]:checked')
+    .forEach((checkbox) => {
+      launchOnCLI(checkbox.data);
     });
 }
 
@@ -111,34 +127,6 @@ function selectAllCheckboxes() {
   });
 }
 
-function launchVisualStudioSolution(solutionPath) {
-  // Use rider command line tool on Mac
-  const riderPath = "/Applications/Rider.app/Contents/MacOS/rider";
-  if (fs.existsSync(riderPath)) {
-    const args = [solutionPath];
-    
-    const options = { windowsHide: false };
-    const child = spawn(riderPath, args, options);
-
-    child.stdout.on("data", (data) => {
-      console.log(`stdout: ${data}`);
-    });
-
-    child.stderr.on("data", (data) => {
-      console.error(`stderr: ${data}`);
-    });
-
-    child.on("close", (code) => {
-      console.log(`Child process exited with code ${code}`);
-    });
-
-    child.on("error", (err) => {
-      console.error("Error launching Rider:", err);
-    });
-  } else {
-    console.error("Rider not found at the specified path.");
-  }
-}
 
 function getLatest(solutionPath, rootPath) {
   let pathArray = solutionPath.split("/");
@@ -185,53 +173,63 @@ function showNotification(title, message, state) {
 
 function updateDb(migratorRelativePath) {
   const dotnetPath = "/usr/local/share/dotnet/dotnet";
-
-  // Resolve full absolute path to the .csproj
   const migratorProjectPath = path.resolve(__dirname, migratorRelativePath);
 
-  // Validate that dotnet is a valid file
   if (!fs.existsSync(dotnetPath) || fs.lstatSync(dotnetPath).isDirectory()) {
     console.error("❌ Invalid dotnet path: not a file or does not exist");
     return;
   }
-
-  // Validate that the .csproj file exists
   if (!fs.existsSync(migratorProjectPath) || fs.lstatSync(migratorProjectPath).isDirectory()) {
     console.error("❌ Invalid migrator project path. Expected a .csproj file.");
     return;
   }
 
-  const args = ["run", "--project", migratorProjectPath];
-  const options = { shell: true };
+  // AppleScript to open Terminal and run the command
+  const command = `"${dotnetPath}" run --project "${migratorProjectPath}"; echo; echo 'Press any key to exit...'; read -n 1`;
+  const osaScript = [
+    'tell application "Terminal"',
+    `do script "${command.replace(/(["\\$`])/g, '\\$1')}"`,
+    'activate',
+    'end tell'
+  ].join('\n');
 
-  const child = spawn(dotnetPath, args, options);
-
-  child.stdout.on("data", (data) => {
-
-    const outputBoxElement = document.getElementById("outputBox");
-
-    if (outputBoxElement) {
-      const lines = outputBoxElement.innerHTML.split(/<\/p>/).filter(line => line.trim().length > 0).map(line => line + "</p>");
-      const lastThree = lines.slice(-50).join('');
-      outputBoxElement.innerHTML = lastThree + `<p class="p-0 m-0">${data.toString()}</p>`;
-      outputBoxElement.scrollTop = outputBoxElement.scrollHeight; // Scroll to the bottom
-    }
-    console.log(`🟢 stdout: ${data.toString()}`);
-
-  });
-
-  child.stderr.on("data", (data) => {
-    console.error(`🔴 stderr: ${data.toString()}`);
-  });
-
-  child.on("close", (code) => {
-      console.log(`⚙️ Child process exited with code ${code}`);
-  });
-
-  child.on("error", (err) => {
-    console.error(`🔴 error: ${err.message}`);
-  });
+  spawn('osascript', ['-e', osaScript], {
+    detached: true,
+    stdio: "ignore"
+  }).unref();
 }
+
+
+
+
+function launchOnCLI(startupProject) {
+  const dotnetPath = "/usr/local/share/dotnet/dotnet";
+  const startupProjectPath = path.resolve(__dirname, startupProject);
+
+  if (!fs.existsSync(dotnetPath) || fs.lstatSync(dotnetPath).isDirectory()) {
+    console.error("❌ Invalid dotnet path: not a file or does not exist");
+    return;
+  }
+  if (!fs.existsSync(startupProjectPath) || fs.lstatSync(startupProjectPath).isDirectory()) {
+    console.error("❌ Invalid migrator project path. Expected a .csproj file.");
+    return;
+  }
+
+  // AppleScript to open Terminal and run the command
+  const command = `"${dotnetPath}" run --project "${startupProjectPath}"; echo; echo 'Press any key to exit...'; read -n 1`;
+  const osaScript = [
+    'tell application "Terminal"',
+    `do script "${command.replace(/(["\\$`])/g, '\\$1')}"`,
+    'activate',
+    'end tell'
+  ].join('\n');
+
+  spawn('osascript', ['-e', osaScript], {
+    detached: true,
+    stdio: "ignore"
+  }).unref();
+}
+
 
 function loadSolutionsFromConfig(solutions,rootPath) {
   const solutionsContainer = document.getElementById("solutionsContainer");
@@ -262,7 +260,9 @@ function loadSolutionsFromConfig(solutions,rootPath) {
     checkbox.type = "checkbox";
     checkbox.classList.add("form-check-input");
     checkbox.id = solution.name.replace(/\s/g, "");
-    checkbox.value = path.join(rootPath, solution.path);
+    checkbox.value = path.join(rootPath, solution.solutionPath);
+    checkbox.data = path.join(rootPath, solution.startupProject);
+
 
     const label = document.createElement("label");
     label.classList.add("form-check-label", "ms-2");
@@ -277,7 +277,7 @@ function loadSolutionsFromConfig(solutions,rootPath) {
     const getLatestButton = document.createElement("button");
     getLatestButton.classList.add("btn", "btn-secondary", "btn-sm", "me-2");
     getLatestButton.innerHTML = '<i class="fa fa-solid fa-download"></i>';
-    getLatestButton.onclick = () => getLatest(solution.path,rootPath);
+    getLatestButton.onclick = () => getLatest(solution.solutionPath,rootPath);
 
     actionsTd.appendChild(getLatestButton);
 
@@ -287,6 +287,15 @@ function loadSolutionsFromConfig(solutions,rootPath) {
       updateDbEl.textContent = "Update DB";
       updateDbEl.onclick = () => updateDb(path.join(rootPath, solution.migratorPath));
       actionsTd.appendChild(updateDbEl);
+    }
+
+
+    if (solution?.startupProject != null) {
+      const runInConsoleEl = document.createElement("button");
+      runInConsoleEl.classList.add("btn", "btn-success", "btn-sm", "ms-1");
+      runInConsoleEl.textContent = "Run In Console";
+      runInConsoleEl.onclick = () => launchOnCLI(path.join(rootPath, solution.startupProject));
+      actionsTd.appendChild(runInConsoleEl);
     }
 
     // Add Dockerize button
