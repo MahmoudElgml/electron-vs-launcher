@@ -71,7 +71,7 @@
         },
         {
             "name": "APG Notification",
-            "startupProject":"APG.NotificationModulesAPIs/src/APGNotifications.Application/APGNotifications.Application.csproj",
+            "startupProject":"APG.NotificationModulesAPIs/src/APGNotifications.Services.Api/APGNotifications.Services.Api.csproj",
             "solutionPath": "APG.NotificationModulesAPIs/APGNotifications.sln",
             "migratorPath": "APG.NotificationModulesAPIs/src/APGNotification.MigrationTools/APGNotification.MigrationTools.csproj",
             "dockerPort": "44391",
