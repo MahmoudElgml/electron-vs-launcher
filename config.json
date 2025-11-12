@@ -80,7 +80,7 @@
         },
         {
             "name": "AmwalSS Fundamental",
-            "startupProject":"",
+            "startupProject":"AmwalSS.Fundamental/src/AmwalSSFundamental.Services.Api/AmwalSSFundamental.Services.Api.csproj",
             "solutionPath": "AmwalSS.Fundamental/AmwalSSFundamental.sln",
             "migratorPath": "AmwalSS.Fundamental/src/AmwalSSFundamental.MigrationTools/AmwalSSFundamental.MigrationTools.csproj",
             "dockerPort": "44309",
@@ -89,7 +89,7 @@
         },
         {
             "name": "AmwalSS Membership",
-            "startupProject":"",
+            "startupProject":"AmwalSS.Membership/src/AmwalSSMembership.Services.Api/AmwalSSMembership.Services.Api.csproj",
             "solutionPath": "AmwalSS.Membership/AmwalSSMembership.sln",
             "migratorPath": "AmwalSS.Membership/src/AmwalSSMembership.MigrationTools/AmwalSSMembership.MigrationTools.csproj",
             "dockerPort": "44379",
@@ -98,7 +98,7 @@
         },
         {
             "name": "AmwalSS Log",
-            "startupProject":"",
+            "startupProject":"AmwalSS.LogModulesAPIs/src/AmwalSSLogs.Services.Api/AmwalSSLogs.Services.Api.csproj",
             "solutionPath": "AmwalSS.LogModulesAPIs/AmwalSSLogs.sln",
             "dockerPort": "44350",
             "contextFolder": "AmwalSS.LogModulesAPIs",
@@ -106,7 +106,7 @@
         },
         {
             "name": "AmwalSS Portal Gateway",
-            "startupProject":"",
+            "startupProject":"AmwalSS.PortalAPIGateway/AmwalSSPortalAPIs/AmwalSSPortalAPIs.csproj",
             "solutionPath": "AmwalSS.PortalAPIGateway/AmwalSSPortalAPIGateway.sln",
             "dockerPort": "44358",
             "contextFolder": "AmwalSS.PortalAPIGateway",

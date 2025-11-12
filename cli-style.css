@@ -14,3 +14,31 @@
 .cli-output  p{
     white-space: break-spaces;
 }
+
+.table {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 0.5rem;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    padding: 1rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+}
+
+.form-check-label {
+    cursor: pointer;
+    user-select: none;
+}
+
+.card {
+    border: none;
+    border-radius: 0.5rem;
+}

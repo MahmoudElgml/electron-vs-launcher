@@ -10,7 +10,7 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <title>Developed By Mahmoud ELgml</title>
+    <title>Solution Launcher - Developed By __weirdzz__</title>
     <link
       rel="stylesheet"
       href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -22,37 +22,41 @@
     />
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
   </head>
-  <body>
+  <body class="bg-light">
     <main>
-      <div class="container mt-5">
-        <!-- <div id="outputBox" class="cli-output my-2">cli output</div> -->
-        <div clas="d-flex flex-column gap-2">
-          <div class="d-flex  align-items-center gap-2 mb-3">
-            <button class="btn btn-sm btn-secondary" id="clearBtn">
-              Reset Selections
-            </button>
-            <button class="btn btn-sm btn-primary" id="selectAllBtn">
-              Select All
-            </button>
-          </div>
+      <div class="container">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex flex-column gap-3">
+              <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-outline-secondary" id="clearBtn">
+                  <i class="fa fa-refresh me-1"></i> Reset
+                </button>
+                <button class="btn btn-primary" id="selectAllBtn">
+                  <i class="fa fa-check-square-o me-1"></i> Select All
+                </button>
+              </div>
 
-          <div class="d-flex justify-content-between align-items-center mb-3">
-            <button class="btn btn-sm btn-success" id="launchBtnForCLI">
-              Run Selected Solutions on CLI
-            </button>
-            
-            <button class="btn btn-sm btn-success" id="launchBtnForIDE">
-              Run Selected Solutions on IDE
-            </button>
-            
-            <button class="btn btn-sm btn-success"  id="get-latest-selected">
-              Get Latest For Selected
-            </button>
+              <div class="d-flex flex-wrap gap-2 w-100">
+                <button class="btn btn-success" id="launchBtnForCLI">
+                  <i class="fa fa-terminal me-1"></i> Run in CLI
+                </button>
+                
+                <button class="btn btn-success" id="launchBtnForIDE">
+                  <i class="fa fa-code me-1"></i> Run in IDE
+                </button>
+                
+                <button class="btn btn-success"  id="get-latest-selected">
+                  <i class="fa fa-download me-1"></i> Get Latest
+                </button>
+              </div>
+            </div>
+
+            <div id="solutionsContainer" class="mt-4">
+
+            </div>
           </div>
         </div>
-
-        <div id="solutionsContainer" class="mt-3"></div>
-
       </div>
     </main>
   </body>
