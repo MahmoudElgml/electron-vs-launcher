@@ -234,6 +234,9 @@ function launchOnCLI(startupProject) {
 function loadSolutionsFromConfig(solutions,rootPath) {
   const solutionsContainer = document.getElementById("solutionsContainer");
 
+  const tableWrapper = document.createElement("div");
+  tableWrapper.classList.add("table-responsive");
+
   const table = document.createElement("table");
   table.classList.add("table", "table-striped", "table-hover", "align-middle");
 
@@ -242,12 +245,29 @@ function loadSolutionsFromConfig(solutions,rootPath) {
 
   const nameHeader = document.createElement("th");
   nameHeader.textContent = "Solution Name";
+  nameHeader.classList.add("text-nowrap");
 
-  const actionsHeader = document.createElement("th");
-  actionsHeader.textContent = "Actions";
+  const getLatestHeader = document.createElement("th");
+  getLatestHeader.textContent = "Get Latest";
+  getLatestHeader.classList.add("text-nowrap");
+
+  const updateDbHeader = document.createElement("th");
+  updateDbHeader.textContent = "Update DB";
+  updateDbHeader.classList.add("text-nowrap");
+
+  const runInConsoleHeader = document.createElement("th");
+  runInConsoleHeader.textContent = "Run In Console";
+  runInConsoleHeader.classList.add("text-nowrap");
+
+  const dockerizeHeader = document.createElement("th");
+  dockerizeHeader.textContent = "Dockerize";
+  dockerizeHeader.classList.add("text-nowrap");
 
   headerRow.appendChild(nameHeader);
-  headerRow.appendChild(actionsHeader);
+  headerRow.appendChild(getLatestHeader);
+  headerRow.appendChild(updateDbHeader);
+  headerRow.appendChild(runInConsoleHeader);
+  headerRow.appendChild(dockerizeHeader);
   thead.appendChild(headerRow);
 
   const tbody = document.createElement("tbody");
@@ -271,43 +291,53 @@ function loadSolutionsFromConfig(solutions,rootPath) {
 
     checkboxTd.appendChild(checkbox);
     checkboxTd.appendChild(label);
+    checkboxTd.classList.add("text-nowrap");
 
-    const actionsTd = document.createElement("td");
-
+    // Get Latest button column
+    const getLatestTd = document.createElement("td");
+    getLatestTd.classList.add("text-nowrap");
     const getLatestButton = document.createElement("button");
-    getLatestButton.classList.add("btn", "btn-secondary", "btn-sm", "me-2");
+    getLatestButton.classList.add("btn", "btn-secondary", "btn-sm");
     getLatestButton.innerHTML = '<i class="fa fa-solid fa-download"></i>';
     getLatestButton.onclick = () => getLatest(solution.solutionPath,rootPath);
+    getLatestTd.appendChild(getLatestButton);
 
-    actionsTd.appendChild(getLatestButton);
-
+    // Update DB button column
+    const updateDbTd = document.createElement("td");
+    updateDbTd.classList.add("text-nowrap");
     if (solution?.migratorPath != null) {
       const updateDbEl = document.createElement("button");
-      updateDbEl.classList.add("btn", "btn-warning", "btn-sm", "ms-1");
+      updateDbEl.classList.add("btn", "btn-warning", "btn-sm");
       updateDbEl.textContent = "Update DB";
       updateDbEl.onclick = () => updateDb(path.join(rootPath, solution.migratorPath));
-      actionsTd.appendChild(updateDbEl);
+      updateDbTd.appendChild(updateDbEl);
     }
 
-
+    // Run In Console button column
+    const runInConsoleTd = document.createElement("td");
+    runInConsoleTd.classList.add("text-nowrap");
     if (solution?.startupProject != null) {
       const runInConsoleEl = document.createElement("button");
-      runInConsoleEl.classList.add("btn", "btn-success", "btn-sm", "ms-1");
+      runInConsoleEl.classList.add("btn", "btn-success", "btn-sm");
       runInConsoleEl.textContent = "Run In Console";
       runInConsoleEl.onclick = () => launchOnCLI(path.join(rootPath, solution.startupProject));
-      actionsTd.appendChild(runInConsoleEl);
+      runInConsoleTd.appendChild(runInConsoleEl);
     }
 
-    // Add Dockerize button
+    // Dockerize button column
+    const dockerizeTd = document.createElement("td");
+    dockerizeTd.classList.add("text-nowrap");
     const dockerizeButton = document.createElement("button");
-    dockerizeButton.classList.add("btn", "btn-primary", "btn-sm", "ms-1");
+    dockerizeButton.classList.add("btn", "btn-primary", "btn-sm");
     dockerizeButton.textContent = "Dockerize";
     dockerizeButton.onclick = () => dockerizeApp(solution,rootPath);
-
-    actionsTd.appendChild(dockerizeButton);
+    dockerizeTd.appendChild(dockerizeButton);
 
     row.appendChild(checkboxTd);
-    row.appendChild(actionsTd);
+    row.appendChild(getLatestTd);
+    row.appendChild(updateDbTd);
+    row.appendChild(runInConsoleTd);
+    row.appendChild(dockerizeTd);
 
     tbody.appendChild(row);
   });
@@ -315,7 +345,8 @@ function loadSolutionsFromConfig(solutions,rootPath) {
   table.appendChild(thead);
   table.appendChild(tbody);
 
-  solutionsContainer.appendChild(table);
+  tableWrapper.appendChild(table);
+  solutionsContainer.appendChild(tableWrapper);
 }
 
 function dockerizeApp(solution, rootPath) {
