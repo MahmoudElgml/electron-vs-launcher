@@ -411,7 +411,7 @@ function loadSolutionsFromConfig(config) {
   }
 
   const accordion = document.createElement("div");
-  accordion.className = "accordion";
+  accordion.className = "accordion app-accordion";
   accordion.id = "solutionsAccordion";
 
   sectionsToRender.forEach((section, index) => {

@@ -1,44 +1,376 @@
-.cli-output {
-  background-color: #1e1e1e;
-  color: #00ff00;
-  font-family: 'Courier New', Courier, monospace;
-  padding:  0 15px;
+/* Amwal Pay palette (from brand logo): purple #AC2CED / #B42EEA, ink #040404–#070707, paper #FEFEFE */
+
+:root {
+  --brand-purple: #ac2ced;
+  --brand-purple-deep: #8b24c4;
+  --brand-purple-soft: #b42eea;
+  --brand-purple-glow: rgba(172, 44, 237, 0.22);
+  --brand-ink: #0a0a0a;
+  --brand-ink-soft: #3d3848;
+  --brand-paper: #fefefe;
+  --brand-muted: #6b6574;
+  --brand-line: rgba(10, 10, 10, 0.08);
+  --brand-page-top: #faf7fc;
+  --brand-page-mid: #f3ecf9;
+  --brand-page-bottom: #eef6fb;
+  --brand-radius: 14px;
+  --brand-radius-sm: 10px;
+  --brand-shadow: 0 12px 40px rgba(26, 11, 40, 0.08);
+  --brand-shadow-sm: 0 4px 18px rgba(26, 11, 40, 0.06);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+}
+
+body.app {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--brand-ink);
+  background: linear-gradient(
+    165deg,
+    var(--brand-page-top) 0%,
+    var(--brand-page-mid) 42%,
+    var(--brand-page-bottom) 100%
+  );
+  background-attachment: fixed;
+}
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem 2rem;
+}
+
+/* —— Header —— */
+.app-header {
+  background: var(--brand-paper);
+  border-bottom: 1px solid var(--brand-line);
+  box-shadow: var(--brand-shadow-sm);
+  margin-bottom: 1.25rem;
+}
+
+.app-header__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 1.1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem 1.75rem;
+}
+
+.app-header__logo {
+  display: block;
+  height: auto;
+  width: min(100%, 260px);
+  max-height: 52px;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.app-header__titles {
+  flex: 1;
+  min-width: 200px;
+}
+
+.app-header__title {
+  margin: 0 0 0.2rem;
+  font-size: 1.35rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--brand-ink);
+}
+
+.app-header__subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--brand-muted);
+  line-height: 1.45;
+  max-width: 36rem;
+}
+
+/* —— Surfaces —— */
+.app-surface {
+  border: 1px solid var(--brand-line);
+  border-radius: var(--brand-radius);
+  box-shadow: var(--brand-shadow);
+  background: var(--brand-paper);
+  overflow: hidden;
+}
+
+.app-surface.card {
+  --bs-card-border-width: 0;
+  --bs-card-bg: transparent;
+}
+
+/* —— Toolbar —— */
+.app-toolbar .card-body {
+  padding: 1rem 1.15rem;
+}
+
+.app-toolbar__body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 1rem 1.25rem;
+}
+
+.app-toolbar__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.app-toolbar__group--grow {
+  flex: 1 1 220px;
+}
+
+.app-toolbar__label {
+  font-size: 0.68rem;
+  font-weight: 650;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--brand-muted);
+}
+
+.app-toolbar__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.app-toolbar__divider {
+  width: 1px;
+  align-self: stretch;
+  min-height: 2.5rem;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(172, 44, 237, 0.25) 20%,
+    rgba(172, 44, 237, 0.25) 80%,
+    transparent
+  );
+}
+
+@media (max-width: 640px) {
+  .app-toolbar__divider {
+    width: 100%;
+    height: 1px;
+    min-height: 0;
+    background: var(--brand-line);
+  }
+}
+
+/* —— Buttons —— */
+.btn {
+  font-weight: 600;
+  border-radius: var(--brand-radius-sm);
+  padding: 0.45rem 0.95rem;
+}
+
+.btn-amwal-primary {
+  --bs-btn-bg: var(--brand-purple);
+  --bs-btn-border-color: var(--brand-purple-deep);
+  --bs-btn-hover-bg: var(--brand-purple-deep);
+  --bs-btn-hover-border-color: #7519a8;
+  --bs-btn-active-bg: #6a1796;
+  --bs-btn-active-border-color: #61148a;
+  --bs-btn-focus-shadow-rgb: 172, 44, 237;
+}
+
+.btn-amwal-outline {
+  border-color: rgba(10, 10, 10, 0.18);
+  color: var(--brand-ink-soft);
+}
+
+.btn-amwal-outline:hover {
+  border-color: var(--brand-purple);
+  color: var(--brand-purple-deep);
+  background: rgba(172, 44, 237, 0.06);
+}
+
+.btn-amwal-cta {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: linear-gradient(135deg, var(--brand-purple) 0%, #7c1fc4 100%);
+  --bs-btn-border-color: transparent;
+  background: linear-gradient(135deg, var(--brand-purple) 0%, #7c1fc4 100%);
+  border: none;
+  box-shadow: 0 2px 12px var(--brand-purple-glow);
+}
+
+.btn-amwal-cta:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 4px 16px var(--brand-purple-glow);
+  color: #fff;
+}
+
+.btn-amwal-cta:active {
+  filter: brightness(0.95);
+}
+
+/* —— Solutions panel —— */
+.app-toolbar {
+  margin-bottom: 1rem;
+}
+
+.app-panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 1rem;
+  padding: 0.85rem 1.15rem;
+  background: linear-gradient(90deg, rgba(172, 44, 237, 0.07) 0%, transparent 55%);
+  border-bottom: 1px solid var(--brand-line);
+  font-size: 0.9rem;
+}
+
+.app-panel__head-title {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.app-panel__head-hint {
+  font-size: 0.78rem;
+  color: var(--brand-muted);
+}
+
+.app-solutions {
+  padding: 1rem 1.15rem 1.15rem;
+}
+
+/* —— Tables —— */
+.app .table {
+  margin-bottom: 0;
+  border-radius: var(--brand-radius-sm);
+  overflow: hidden;
+  box-shadow: none;
+  border: 1px solid var(--brand-line);
+}
+
+.app .table thead th {
+  background: linear-gradient(180deg, #141018 0%, #1f1628 100%);
+  color: #f6f3fa;
+  border-bottom: 3px solid var(--brand-purple);
+  padding: 0.75rem 1rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.app .table tbody td {
+  padding: 0.65rem 1rem;
+  vertical-align: middle;
+  border-color: var(--brand-line);
+}
+
+.app .table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(172, 44, 237, 0.045);
+}
+
+.app .table-hover > tbody > tr:hover > * {
+  background-color: rgba(172, 44, 237, 0.09);
+}
+
+.app .table-responsive {
+  border-radius: var(--brand-radius-sm);
+}
+
+/* —— Form controls —— */
+.app .form-check-input {
+  width: 1.05rem;
+  height: 1.05rem;
+  border-color: rgba(10, 10, 10, 0.28);
+}
+
+.app .form-check-input:checked {
+  background-color: var(--brand-purple);
+  border-color: var(--brand-purple-deep);
+}
+
+.app .form-check-label {
+  color: var(--brand-ink-soft);
+}
+
+/* —— Accordion —— */
+.app-accordion.accordion {
+  --bs-accordion-border-radius: var(--brand-radius-sm);
+  --bs-accordion-inner-border-radius: calc(var(--brand-radius-sm) - 1px);
+}
+
+.app-accordion .accordion-item {
+  border: 1px solid var(--brand-line);
+  border-radius: var(--brand-radius-sm);
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+  background: var(--brand-paper);
+}
+
+.app-accordion .accordion-button {
+  font-weight: 650;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.1rem;
+  background: #fbf9fd;
+  color: var(--brand-ink);
+}
+
+.app-accordion .accordion-button:not(.collapsed) {
+  background: linear-gradient(90deg, #1a1224 0%, #2a1740 100%);
+  color: #fff;
+  box-shadow: none;
+}
+
+.app-accordion .accordion-button:not(.collapsed)::after {
+  filter: brightness(0) invert(1);
+}
+
+.app-accordion .accordion-button:focus {
+  box-shadow: 0 0 0 0.2rem var(--brand-purple-glow);
+  border-color: transparent;
+}
+
+.app-accordion .accordion-body {
+  padding: 1rem 1.1rem 1.1rem;
+  background: #fdfcfe;
+}
+
+.app-accordion .accordion-body .btn-outline-primary {
+  --bs-btn-color: var(--brand-purple-deep);
+  --bs-btn-border-color: rgba(172, 44, 237, 0.45);
+  --bs-btn-hover-bg: rgba(172, 44, 237, 0.1);
+  --bs-btn-hover-color: var(--brand-purple-deep);
+  --bs-btn-hover-border-color: var(--brand-purple);
+}
+
+/* Small buttons in table */
+.app .btn-sm {
   border-radius: 8px;
-  box-shadow: 0 0 10px #000;
+  font-weight: 600;
+}
+
+/* —— CLI output (notifications / logs) —— */
+.cli-output {
+  background-color: #141018;
+  color: #c8f5c4;
+  font-family: ui-monospace, "Cascadia Code", "Courier New", monospace;
+  padding: 0 15px;
+  border-radius: var(--brand-radius-sm);
+  box-shadow: inset 0 0 0 1px rgba(172, 44, 237, 0.2);
   overflow-y: auto;
   overflow-x: auto;
   max-height: 200px;
-  font-size: 14px;
+  font-size: 13px;
 }
 
-.cli-output  p{
-    white-space: break-spaces;
-}
-
-.table {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    border-radius: 0.5rem;
-}
-
-.table thead th {
-    background-color: #f8f9fa;
-    border-bottom: 2px solid #dee2e6;
-    padding: 1rem;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 38px;
-}
-
-.form-check-label {
-    cursor: pointer;
-    user-select: none;
-}
-
-.card {
-    border: none;
-    border-radius: 0.5rem;
+.cli-output p {
+  white-space: break-spaces;
 }

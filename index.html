@@ -1,52 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
-  <title>Solution Launcher - Developed By Mahmoud El Gaml</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Amwal Pay · Solution Launcher</title>
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="cli-style.css">
   <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css" />
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 </head>
 
-<body class="bg-light">
-  <main>
-    <div class="container-fluid px-4 py-3">
-      <div class="d-flex flex-column gap-3">
-        <div class="d-flex align-items-center gap-2">
-          <button class="btn btn-outline-secondary" id="clearBtn">
-            <i class="fa fa-refresh me-1"></i> Reset
-          </button>
-          <button class="btn btn-primary" id="selectAllBtn">
-            <i class="fa fa-check-square-o me-1"></i> Select All
-          </button>
-        </div>
-
-        <div class="d-flex flex-wrap gap-2 w-100">
-          <button class="btn btn-success" id="launchBtnForCLI">
-            <i class="fa fa-terminal me-1"></i> Run in CLI
-          </button>
-
-          <button class="btn btn-success" id="launchBtnForIDE">
-            <i class="fa fa-code me-1"></i> Run in IDE
-          </button>
-
-          <button class="btn btn-success" id="get-latest-selected">
-            <i class="fa fa-download me-1"></i> Get Latest
-          </button>
-        </div>
-      </div>
-
-      <div id="solutionsContainer" class="mt-4">
-
+<body class="app">
+  <header class="app-header">
+    <div class="app-header__inner">
+      <img src="./assets/amwal-pay-logo.svg" alt="Amwal Pay" class="app-header__logo" width="240" height="54" />
+      <div class="app-header__titles">
+        <h1 class="app-header__title">Solution Launcher</h1>
+        <p class="app-header__subtitle">Select repos, run in Rider or CLI, pull latest, and more.</p>
       </div>
     </div>
-  </main>
+  </header>
+
+  <div class="app-container">
+    <section class="app-toolbar card app-surface" aria-label="Actions">
+      <div class="card-body app-toolbar__body">
+        <div class="app-toolbar__group">
+          <span class="app-toolbar__label">Selection</span>
+          <div class="app-toolbar__buttons">
+            <button type="button" class="btn btn-outline-secondary btn-amwal-outline" id="clearBtn">
+              <i class="fa fa-refresh me-1"></i> Reset
+            </button>
+            <button type="button" class="btn btn-primary btn-amwal-primary" id="selectAllBtn">
+              <i class="fa fa-check-square-o me-1"></i> Select all
+            </button>
+          </div>
+        </div>
+        <div class="app-toolbar__divider" role="presentation"></div>
+        <div class="app-toolbar__group app-toolbar__group--grow">
+          <span class="app-toolbar__label">Run &amp; sync</span>
+          <div class="app-toolbar__buttons">
+            <button type="button" class="btn btn-amwal-cta" id="launchBtnForCLI">
+              <i class="fa fa-terminal me-1"></i> Run in CLI
+            </button>
+            <button type="button" class="btn btn-amwal-cta" id="launchBtnForIDE">
+              <i class="fa fa-code me-1"></i> Run in IDE
+            </button>
+            <button type="button" class="btn btn-amwal-cta" id="get-latest-selected">
+              <i class="fa fa-download me-1"></i> Get latest
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="app-panel card app-surface" aria-label="Solutions">
+      <div class="card-header app-panel__head">
+        <span class="app-panel__head-title">Solutions</span>
+        <span class="app-panel__head-hint">Expand a group to work with its solutions</span>
+      </div>
+      <div class="card-body p-0">
+        <div id="solutionsContainer" class="app-solutions"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="./renderer.js"></script>
 </body>
-<script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="./renderer.js"></script>
 
 </html>

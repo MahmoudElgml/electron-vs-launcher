@@ -127,7 +127,7 @@
             "name": "AmwalSS Fundamental",
             "category": "dotnet",
             "startupProject":"AmwalSS.Fundamental/src/AmwalSSFundamental.Services.Api/AmwalSSFundamental.Services.Api.csproj",
-            "solutionPath": "AmwalSS.Fundamental/AmwalSSFundamental.sln",
+            "solutionPath": "AmwalSS.Fundamental/AmwalSSFundamental.slnx",
             "migratorPath": "AmwalSS.Fundamental/src/AmwalSSFundamental.MigrationTools/AmwalSSFundamental.MigrationTools.csproj",
             "dockerPort": "44309",
             "contextFolder": "AmwalSS.Fundamental",
@@ -137,7 +137,7 @@
             "name": "AmwalSS Membership",
             "category": "dotnet",
             "startupProject":"AmwalSS.Membership/src/AmwalSSMembership.Services.Api/AmwalSSMembership.Services.Api.csproj",
-            "solutionPath": "AmwalSS.Membership/AmwalSSMembership.sln",
+            "solutionPath": "AmwalSS.Membership/AmwalSSMembership.slnx",
             "migratorPath": "AmwalSS.Membership/src/AmwalSSMembership.MigrationTools/AmwalSSMembership.MigrationTools.csproj",
             "dockerPort": "44379",
             "contextFolder": "AmwalSS.Membership",
@@ -147,20 +147,121 @@
             "name": "AmwalSS Log",
             "category": "dotnet",
             "startupProject":"AmwalSS.LogModulesAPIs/src/AmwalSSLogs.Services.Api/AmwalSSLogs.Services.Api.csproj",
-            "solutionPath": "AmwalSS.LogModulesAPIs/AmwalSSLogs.sln",
-            "dockerPort": "44350",
-            "contextFolder": "AmwalSS.LogModulesAPIs",
-            "imageContainerName": "amwalss-log"
+            "solutionPath": "AmwalSS.LogModulesAPIs/AmwalSSLogs.slnx"
         },
         {
             "name": "AmwalSS Portal Gateway",
             "category": "dotnet",
             "startupProject":"AmwalSS.PortalAPIGateway/AmwalSSPortalAPIs/AmwalSSPortalAPIs.csproj",
-            "solutionPath": "AmwalSS.PortalAPIGateway/AmwalSSPortalAPIGateway.sln",
+            "solutionPath": "AmwalSS.PortalAPIGateway/AmwalSSPortalAPIGateway.slnx",
             "dockerPort": "44358",
             "contextFolder": "AmwalSS.PortalAPIGateway",
             "imageContainerName": "amwalss-portal-gateway"
         }
+            ]
+        },
+        {
+            "title": "SRM",
+            "solutions": [
+                {
+                    "name": "SRM Fundamental",
+                    "category": "dotnet",
+                    "solutionPath": "SRM.Fundamentals/SRM.Fundamentals.sln",
+                    "startupProject": "SRM.Fundamentals/src/SRM.Fundamentals.Services.Api/SRM.Fundamentals.Services.Api.csproj",
+                    "migratorPath": "SRM.Fundamentals/src/SRM.Fundamentals.MigrationTools/SRM.Fundamentals.MigrationTools.csproj"
+                },
+                {
+                    "name": "SRM Log",
+                    "category": "dotnet",
+                    "solutionPath": "SRM.LogModulesAPIs/SRMLogs.sln",
+                    "startupProject": "SRM.LogModulesAPIs/src/SRMLogs.Services.Api/SRMLogs.Services.Api.csproj"
+                },
+                {
+                    "name": "SRM Membership",
+                    "category": "dotnet",
+                    "solutionPath": "SRM.Membership/SRM.Membership.sln",
+                    "startupProject": "SRM.Membership/src/SRM.Membership.Services.Api/SRM.Membership.Services.Api.csproj",
+                    "migratorPath": "SRM.Membership/src/SRM.Membership.MigrationTools/SRM.Membership.MigrationTools.csproj"
+                },
+                {
+                    "name": "SRM Notifications",
+                    "category": "dotnet",
+                    "solutionPath": "SRM.Notifications/SRM.Notifications.sln",
+                    "startupProject": "SRM.Notifications/src/SRM.Notifications.Services.Api/SRM.Notifications.Services.Api.csproj",
+                    "migratorPath": "SRM.Notifications/src/SRM.Notification.MigrationTools/SRM.Notification.MigrationTools.csproj"
+                },
+                {
+                    "name": "SRM Portal Gateway",
+                    "category": "dotnet",
+                    "solutionPath": "SRM.PortalAPIGateway/SRM.PortalAPIGateway.sln",
+                    "startupProject": "SRM.PortalAPIGateway/SRM.PortalAPIs/SRM.PortalAPIs.csproj"
+                },
+                {
+                    "name": "SRM Portal",
+                    "category": "node",
+                    "solutionPath": "SRM.Portal",
+                    "startupProject": "SRM.Portal",
+                    "npmScript": "start"
+                },
+                {
+                    "name": "SRM Portal Proxy",
+                    "category": "node",
+                    "solutionPath": "SRM.Portal.Proxy",
+                    "startupProject": "SRM.Portal.Proxy",
+                    "npmScript": "start"
+                }
+            ]
+        },
+        {
+            "title": "TMS",
+            "solutions": [
+                {
+                    "name": "TMS Fundamental",
+                    "category": "dotnet",
+                    "solutionPath": "TMS.Fundamentals/TMS.Fundamentals.sln",
+                    "startupProject": "TMS.Fundamentals/src/TMS.Fundamentals.Services.Api/TMS.Fundamentals.Services.Api.csproj",
+                    "migratorPath": "TMS.Fundamentals/src/TMS.Fundamentals.MigrationTools/TMS.Fundamentals.MigrationTools.csproj"
+                },
+                {
+                    "name": "TMS Log",
+                    "category": "dotnet",
+                    "solutionPath": "TMS.Logs/TMS.Logs.sln",
+                    "startupProject": "TMS.Logs/src/TMS.Logs.Services.Api/TMS.Logs.Services.Api.csproj"
+                },
+                {
+                    "name": "TMS Membership",
+                    "category": "dotnet",
+                    "solutionPath": "TMS.Membership/TMS.Membership.sln",
+                    "startupProject": "TMS.Membership/src/TMS.Membership.Services.Api/TMS.Membership.Services.Api.csproj",
+                    "migratorPath": "TMS.Membership/src/TMS.Membership.MigrationTools/TMS.Membership.MigrationTools.csproj"
+                },
+                {
+                    "name": "TMS Notifications",
+                    "category": "dotnet",
+                    "solutionPath": "TMS.Notifications/TMS.Notifications.sln",
+                    "startupProject": "TMS.Notifications/src/TMS.Notifications.Services.Api/TMS.Notifications.Services.Api.csproj",
+                    "migratorPath": "TMS.Notifications/src/TMS.Notification.MigrationTools/TMS.Notification.MigrationTools.csproj"
+                },
+                {
+                    "name": "TMS Portal Gateway",
+                    "category": "dotnet",
+                    "solutionPath": "TMS.PortalAPIGateway/TMS.PortalAPIGateway.sln",
+                    "startupProject": "TMS.PortalAPIGateway/TMS.PortalAPIs/TMS.PortalAPIs.csproj"
+                },
+                {
+                    "name": "TMS Portal",
+                    "category": "node",
+                    "solutionPath": "TMS.Portal",
+                    "startupProject": "TMS.Portal",
+                    "npmScript": "start"
+                },
+                {
+                    "name": "TMS Portal Proxy",
+                    "category": "node",
+                    "solutionPath": "TMS.Portal.Proxy",
+                    "startupProject": "TMS.Portal.Proxy",
+                    "npmScript": "start"
+                }
             ]
         }
     ]

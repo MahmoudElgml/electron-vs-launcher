@@ -5,33 +5,29 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
+    "icons": "node scripts/generate-app-icons.js",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "dist:unsigned": "CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder"
   },
   "build": {
     "appId": "your.app.id",
+    "icon": "build/icon.png",
     "directories": {
       "output": "dist"
     },
-    "win": {
-      "icon": "build/icon.ico"
-    },
     "mac": {
-      "icon": "build/icon.icns",
       "identity": null
-    },
-    "linux": {
-      "icon": "build/icon.png"
     }
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^5.3.3",
+    "electron": "^36.2.0",
     "electron-builder": "^26.0.12",
-    "electron": "^36.2.0"
+    "sharp": "^0.34.5",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "bootstrap": "^5.3.2",
