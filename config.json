@@ -1,6 +1,9 @@
 {
     "rootPath": "/Users/mahmoudelgml/git-repos/amwal-pay/",
-    "solutions": [
+    "sections": [
+        {
+            "title": "APG",
+            "solutions": [
         {
             "name": "APG Membership",
             "category": "dotnet",
@@ -88,6 +91,39 @@
             "imageContainerName": "apg-notification"
         },
         {
+            "name": "APG Portal",
+            "category": "node",
+            "solutionPath": "APG.Portal",
+            "startupProject": "APG.Portal",
+            "npmScript": "start"
+        },
+        {
+            "name": "APG Portal Proxy",
+            "category": "node",
+            "solutionPath": "APG.Portal.Proxy",
+            "startupProject": "APG.Portal.Proxy",
+            "npmScript": "start"
+        },
+        {
+            "name": "APG eCommerce Smartbox",
+            "category": "node",
+            "solutionPath": "APG.eCommerceSmartbox",
+            "startupProject": "APG.eCommerceSmartbox",
+            "npmScript": "start"
+        },
+        {
+            "name": "APG eCommerce Smartbox Proxy",
+            "category": "node",
+            "solutionPath": "APG.eCommerceSmartbox.Proxy",
+            "startupProject": "APG.eCommerceSmartbox.Proxy",
+            "npmScript": "start"
+        }
+            ]
+        },
+        {
+            "title": "AmwalSS",
+            "solutions": [
+        {
             "name": "AmwalSS Fundamental",
             "category": "dotnet",
             "startupProject":"AmwalSS.Fundamental/src/AmwalSSFundamental.Services.Api/AmwalSSFundamental.Services.Api.csproj",
@@ -124,34 +160,8 @@
             "dockerPort": "44358",
             "contextFolder": "AmwalSS.PortalAPIGateway",
             "imageContainerName": "amwalss-portal-gateway"
-        },
-        {
-            "name": "APG Portal",
-            "category": "node",
-            "solutionPath": "APG.Portal",
-            "startupProject": "APG.Portal",
-            "npmScript": "start"
-        },
-        {
-            "name": "APG Portal Proxy",
-            "category": "node",
-            "solutionPath": "APG.Portal.Proxy",
-            "startupProject": "APG.Portal.Proxy",
-            "npmScript": "start"
-        },
-        {
-            "name": "APG eCommerce Smartbox",
-            "category": "node",
-            "solutionPath": "APG.eCommerceSmartbox",
-            "startupProject": "APG.eCommerceSmartbox",
-            "npmScript": "start"
-        },
-        {
-            "name": "APG eCommerce Smartbox Proxy",
-            "category": "node",
-            "solutionPath": "APG.eCommerceSmartbox.Proxy",
-            "startupProject": "APG.eCommerceSmartbox.Proxy",
-            "npmScript": "start"
+        }
+            ]
         }
     ]
 }

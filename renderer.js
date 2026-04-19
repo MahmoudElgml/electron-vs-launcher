@@ -266,9 +266,7 @@ function launchOnCLI(startupProject, category, npmScript) {
 }
 
 
-function loadSolutionsFromConfig(solutions,rootPath) {
-  const solutionsContainer = document.getElementById("solutionsContainer");
-
+function createSolutionsTable(solutions, rootPath) {
   const tableWrapper = document.createElement("div");
   tableWrapper.classList.add("table-responsive");
 
@@ -390,7 +388,90 @@ function loadSolutionsFromConfig(solutions,rootPath) {
   table.appendChild(tbody);
 
   tableWrapper.appendChild(table);
-  solutionsContainer.appendChild(tableWrapper);
+  return tableWrapper;
+}
+
+function loadSolutionsFromConfig(config) {
+  const solutionsContainer = document.getElementById("solutionsContainer");
+  solutionsContainer.replaceChildren();
+
+  const rootPath = config.rootPath;
+
+  let sectionsToRender = [];
+  if (Array.isArray(config.sections) && config.sections.length > 0) {
+    sectionsToRender = config.sections.filter(
+      (s) => s.solutions && s.solutions.length > 0
+    );
+  } else if (Array.isArray(config.solutions) && config.solutions.length > 0) {
+    sectionsToRender = [{ title: "Solutions", solutions: config.solutions }];
+  }
+
+  if (sectionsToRender.length === 0) {
+    return;
+  }
+
+  const accordion = document.createElement("div");
+  accordion.className = "accordion";
+  accordion.id = "solutionsAccordion";
+
+  sectionsToRender.forEach((section, index) => {
+    const collapseId = `section-collapse-${index}`;
+    const headingId = `section-heading-${index}`;
+
+    const item = document.createElement("div");
+    item.className = "accordion-item";
+
+    const headerWrap = document.createElement("h2");
+    headerWrap.className = "accordion-header";
+    headerWrap.id = headingId;
+
+    const isOpen = index === 0;
+    const toggleBtn = document.createElement("button");
+    toggleBtn.type = "button";
+    toggleBtn.className = isOpen
+      ? "accordion-button"
+      : "accordion-button collapsed";
+    toggleBtn.setAttribute("data-bs-toggle", "collapse");
+    toggleBtn.setAttribute("data-bs-target", "#" + collapseId);
+    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    toggleBtn.setAttribute("aria-controls", collapseId);
+    toggleBtn.textContent = section.title || "Solutions";
+
+    headerWrap.appendChild(toggleBtn);
+
+    const collapse = document.createElement("div");
+    collapse.id = collapseId;
+    collapse.className = isOpen
+      ? "accordion-collapse collapse show"
+      : "accordion-collapse collapse";
+    collapse.setAttribute("data-bs-parent", "#solutionsAccordion");
+
+    const body = document.createElement("div");
+    body.className = "accordion-body";
+
+    const toolbar = document.createElement("div");
+    toolbar.className = "d-flex justify-content-end mb-2";
+    const selectSectionBtn = document.createElement("button");
+    selectSectionBtn.type = "button";
+    selectSectionBtn.className = "btn btn-outline-primary btn-sm";
+    selectSectionBtn.innerHTML =
+      '<i class="fa fa-check-square-o me-1"></i> Select all in section';
+    selectSectionBtn.addEventListener("click", () => {
+      body.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+        cb.checked = true;
+      });
+    });
+    toolbar.appendChild(selectSectionBtn);
+    body.appendChild(toolbar);
+    body.appendChild(createSolutionsTable(section.solutions, rootPath));
+
+    collapse.appendChild(body);
+    item.appendChild(headerWrap);
+    item.appendChild(collapse);
+    accordion.appendChild(item);
+  });
+
+  solutionsContainer.appendChild(accordion);
 }
 
 function dockerizeApp(solution, rootPath) {
@@ -442,8 +523,8 @@ function loadSolutions() {
       return;
     }
     const config = JSON.parse(data);
-    this.rootPathGlobal=config.rootPath
-    loadSolutionsFromConfig(config.solutions, config.rootPath);
+    this.rootPathGlobal = config.rootPath;
+    loadSolutionsFromConfig(config);
   });
 }
 

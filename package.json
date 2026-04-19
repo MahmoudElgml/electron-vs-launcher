@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "dist:unsigned": "CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder"
   },
   "build": {
     "appId": "your.app.id",
@@ -17,7 +18,8 @@
       "icon": "build/icon.ico"
     },
     "mac": {
-      "icon": "build/icon.icns"
+      "icon": "build/icon.icns",
+      "identity": null
     },
     "linux": {
       "icon": "build/icon.png"
