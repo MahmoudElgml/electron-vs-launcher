@@ -81,6 +81,18 @@ body.app {
   min-width: 200px;
 }
 
+.app-header__actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.app-theme-toggle {
+  min-width: 2.25rem;
+  padding: 0.35rem 0.55rem;
+}
+
 .app-header__title {
   margin: 0 0 0.2rem;
   font-size: 1.35rem;
@@ -373,4 +385,87 @@ body.app {
 
 .cli-output p {
   white-space: break-spaces;
+}
+
+/* —— Dark mode —— */
+html[data-theme="dark"] {
+  --brand-purple: #c471f7;
+  --brand-purple-deep: #ac2ced;
+  --brand-purple-soft: #d494ff;
+  --brand-purple-glow: rgba(196, 113, 247, 0.28);
+  --brand-ink: #f2eef9;
+  --brand-ink-soft: #c5bdd6;
+  --brand-paper: #1c1826;
+  --brand-muted: #958fa8;
+  --brand-line: rgba(255, 255, 255, 0.1);
+  --brand-page-top: #13101a;
+  --brand-page-mid: #1a1526;
+  --brand-page-bottom: #0f0d14;
+  --brand-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --brand-shadow-sm: 0 4px 18px rgba(0, 0, 0, 0.38);
+}
+
+html[data-theme="dark"] .app-panel__head {
+  background: linear-gradient(90deg, rgba(172, 44, 237, 0.14) 0%, transparent 55%);
+}
+
+html[data-theme="dark"] .app-toolbar__divider {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(196, 113, 247, 0.35) 20%,
+    rgba(196, 113, 247, 0.35) 80%,
+    transparent
+  );
+}
+
+html[data-theme="dark"] .btn-amwal-outline {
+  border-color: rgba(255, 255, 255, 0.22);
+  color: var(--brand-ink-soft);
+}
+
+html[data-theme="dark"] .btn-amwal-outline:hover {
+  border-color: var(--brand-purple);
+  color: var(--brand-ink);
+  background: rgba(172, 44, 237, 0.15);
+}
+
+html[data-theme="dark"] .app .table {
+  --bs-table-color: var(--brand-ink-soft);
+  --bs-table-bg: var(--brand-paper);
+}
+
+html[data-theme="dark"] .app .table tbody td {
+  color: var(--brand-ink-soft);
+  border-color: var(--brand-line);
+}
+
+html[data-theme="dark"] .app .table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(172, 44, 237, 0.1);
+}
+
+html[data-theme="dark"] .app .table-hover > tbody > tr:hover > * {
+  background-color: rgba(172, 44, 237, 0.16);
+}
+
+html[data-theme="dark"] .app .form-check-input {
+  border-color: rgba(255, 255, 255, 0.35);
+  background-color: var(--brand-paper);
+}
+
+html[data-theme="dark"] .app-accordion .accordion-button {
+  background: #252030;
+  color: var(--brand-ink);
+}
+
+html[data-theme="dark"] .app-accordion .accordion-body {
+  background: #181522;
+}
+
+html[data-theme="dark"] .app-accordion .accordion-body .btn-outline-primary {
+  --bs-btn-color: #e0c8ff;
+  --bs-btn-border-color: rgba(196, 113, 247, 0.55);
+  --bs-btn-hover-bg: rgba(172, 44, 237, 0.2);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-border-color: var(--brand-purple);
 }

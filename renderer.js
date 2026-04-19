@@ -17,6 +17,52 @@ document
   .addEventListener("click", selectAllCheckboxes);
 document.getElementById('get-latest-selected').addEventListener('click', getLatestFromSelected);
 
+const THEME_STORAGE_KEY = "electron-vs-launcher-theme";
+
+(function initThemeToggle() {
+  const btn = document.getElementById("themeToggleBtn");
+  if (!btn) return;
+
+  function applyTheme(theme) {
+    const t = theme === "dark" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", t);
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, t);
+    } catch (_) {}
+
+    const icon = btn.querySelector("i");
+    if (icon) {
+      icon.className =
+        t === "dark" ? "fa fa-sun-o" : "fa fa-moon-o";
+    }
+    btn.setAttribute(
+      "aria-label",
+      t === "dark" ? "Use light mode" : "Use dark mode"
+    );
+    btn.title = t === "dark" ? "Light mode" : "Dark mode";
+  }
+
+  let saved;
+  try {
+    saved = localStorage.getItem(THEME_STORAGE_KEY);
+  } catch (_) {}
+
+  const prefersDark =
+    typeof window.matchMedia === "function" &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  if (saved === "dark" || saved === "light") {
+    applyTheme(saved);
+  } else {
+    applyTheme(prefersDark ? "dark" : "light");
+  }
+
+  btn.addEventListener("click", () => {
+    const cur = document.documentElement.getAttribute("data-theme") || "light";
+    applyTheme(cur === "dark" ? "light" : "dark");
+  });
+})();
+
 const riderPath = "/Applications/Rider.app/Contents/MacOS/rider";
 
 // Check if Rider is already running
