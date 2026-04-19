@@ -3,6 +3,7 @@
     "solutions": [
         {
             "name": "APG Membership",
+            "category": "dotnet",
             "solutionPath": "APG.MembershipModulesAPIs/APGMembership.sln",
             "startupProject":"APG.MembershipModulesAPIs/src/APGMembership.Services.Api/APGMembership.Services.Api.csproj",
             "migratorPath": "APG.MembershipModulesAPIs/src/APGMembership.MigrationTools/APGMembership.MigrationTools.csproj",
@@ -12,6 +13,7 @@
         },
         {
             "name": "APG Portal API Gateway",
+            "category": "dotnet",
             "startupProject" : "/APG.PortalAPIGateway/APGPortalAPIs/APGPortalAPIs.csproj",
             "solutionPath": "APG.PortalAPIGateway/APGPortalAPIGateway.sln",
             "dockerPort": "44359",
@@ -20,6 +22,7 @@
         },
         {
             "name": "APG Fundamental",
+            "category": "dotnet",
             "startupProject":"APG.FundamentalModulesAPIs/src/APGFundamentals.Services.Api/APGFundamentals.Services.Api.csproj",
             "solutionPath": "APG.FundamentalModulesAPIs/APGFundamentals.sln",
             "migratorPath": "APG.FundamentalModulesAPIs/src/APGFundamental.MigrationTools/APGFundamental.MigrationTools.csproj",
@@ -29,6 +32,7 @@
         },
         {
             "name": "APG Transaction",
+            "category": "dotnet",
             "startupProject":"APG.TransactionModulesAPIs/src/APGTransaction.Services.Api/APGTransaction.Services.Api.csproj",
             "solutionPath": "APG.TransactionModulesAPIs/APGTransaction.sln",
             "migratorPath": "APG.TransactionModulesAPIs/src/APGTransactions.MigrationTools/APGTransactions.MigrationTools.csproj",
@@ -38,6 +42,7 @@
         },
         {
             "name": "APG Log",
+            "category": "dotnet",
             "startupProject":"APG.LogModulesAPIs/src/APGLogs.Services.Api/APGLogs.Services.Api.csproj",
             "solutionPath": "APG.LogModulesAPIs/APGLogs.sln",
             "dockerPort": "44349",
@@ -46,6 +51,7 @@
         },
         {
             "name": "APG Smartbox API Gateway",
+            "category": "dotnet",
             "startupProject":"APG.SmartBoxAPIGateway/APGSmartBoxAPIs/APGSmartBoxAPIs.csproj",
             "solutionPath": "APG.SmartBoxAPIGateway/APGSmartBoxAPIGateway.sln",
             "dockerPort": "44357",
@@ -54,6 +60,7 @@
         },
         {
             "name": "APG Execution",
+            "category": "dotnet",
             "startupProject":"APG.ExecutionModulesAPIs/src/APGExecutions.Services.Api/APGExecutions.Services.Api.csproj",
             "solutionPath": "APG.ExecutionModulesAPIs/APGExecutions.sln",
             "dockerPort": "44310",
@@ -62,6 +69,7 @@
         },
         {
             "name": "APG Digital Integration",
+            "category": "dotnet",
             "startupProject":"APG.MPCSSIntegrationAPIs/src/APGMPCSSIntegration.Services.Api/APGDigitalIntegration.Services.Api.csproj",
             "solutionPath": "APG.MPCSSIntegrationAPIs/APGDigitalIntegration.sln",
             "migratorPath": "APG.MPCSSIntegrationAPIs/src/APGDigitalIntegration.MigrationTools/APGDigitalIntegration.MigrationTools.csproj",
@@ -71,6 +79,7 @@
         },
         {
             "name": "APG Notification",
+            "category": "dotnet",
             "startupProject":"APG.NotificationModulesAPIs/src/APGNotifications.Services.Api/APGNotifications.Services.Api.csproj",
             "solutionPath": "APG.NotificationModulesAPIs/APGNotifications.sln",
             "migratorPath": "APG.NotificationModulesAPIs/src/APGNotification.MigrationTools/APGNotification.MigrationTools.csproj",
@@ -80,6 +89,7 @@
         },
         {
             "name": "AmwalSS Fundamental",
+            "category": "dotnet",
             "startupProject":"AmwalSS.Fundamental/src/AmwalSSFundamental.Services.Api/AmwalSSFundamental.Services.Api.csproj",
             "solutionPath": "AmwalSS.Fundamental/AmwalSSFundamental.sln",
             "migratorPath": "AmwalSS.Fundamental/src/AmwalSSFundamental.MigrationTools/AmwalSSFundamental.MigrationTools.csproj",
@@ -89,6 +99,7 @@
         },
         {
             "name": "AmwalSS Membership",
+            "category": "dotnet",
             "startupProject":"AmwalSS.Membership/src/AmwalSSMembership.Services.Api/AmwalSSMembership.Services.Api.csproj",
             "solutionPath": "AmwalSS.Membership/AmwalSSMembership.sln",
             "migratorPath": "AmwalSS.Membership/src/AmwalSSMembership.MigrationTools/AmwalSSMembership.MigrationTools.csproj",
@@ -98,6 +109,7 @@
         },
         {
             "name": "AmwalSS Log",
+            "category": "dotnet",
             "startupProject":"AmwalSS.LogModulesAPIs/src/AmwalSSLogs.Services.Api/AmwalSSLogs.Services.Api.csproj",
             "solutionPath": "AmwalSS.LogModulesAPIs/AmwalSSLogs.sln",
             "dockerPort": "44350",
@@ -106,11 +118,40 @@
         },
         {
             "name": "AmwalSS Portal Gateway",
+            "category": "dotnet",
             "startupProject":"AmwalSS.PortalAPIGateway/AmwalSSPortalAPIs/AmwalSSPortalAPIs.csproj",
             "solutionPath": "AmwalSS.PortalAPIGateway/AmwalSSPortalAPIGateway.sln",
             "dockerPort": "44358",
             "contextFolder": "AmwalSS.PortalAPIGateway",
             "imageContainerName": "amwalss-portal-gateway"
+        },
+        {
+            "name": "APG Portal",
+            "category": "node",
+            "solutionPath": "APG.Portal",
+            "startupProject": "APG.Portal",
+            "npmScript": "start"
+        },
+        {
+            "name": "APG Portal Proxy",
+            "category": "node",
+            "solutionPath": "APG.Portal.Proxy",
+            "startupProject": "APG.Portal.Proxy",
+            "npmScript": "start"
+        },
+        {
+            "name": "APG eCommerce Smartbox",
+            "category": "node",
+            "solutionPath": "APG.eCommerceSmartbox",
+            "startupProject": "APG.eCommerceSmartbox",
+            "npmScript": "start"
+        },
+        {
+            "name": "APG eCommerce Smartbox Proxy",
+            "category": "node",
+            "solutionPath": "APG.eCommerceSmartbox.Proxy",
+            "startupProject": "APG.eCommerceSmartbox.Proxy",
+            "npmScript": "start"
         }
     ]
 }

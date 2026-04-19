@@ -71,7 +71,7 @@ function launchSelectedSolutionsOnCLI() {
   document
     .querySelectorAll('input[type="checkbox"]:checked')
     .forEach((checkbox) => {
-      launchOnCLI(checkbox.data);
+      launchOnCLI(checkbox.data, checkbox._category, checkbox._npmScript);
     });
 }
 
@@ -98,8 +98,7 @@ function getLatestFromSelected() {
   document
   .querySelectorAll('input[type="checkbox"]:checked')
   .forEach((checkbox) => {
-    getLatest(checkbox.value,rootPathGlobal);
-
+    getLatest(checkbox.value, rootPathGlobal);
   });
 }
 
@@ -129,12 +128,25 @@ function selectAllCheckboxes() {
 
 
 function getLatest(solutionPath, rootPath) {
-  let pathArray = solutionPath.split("/");
-  let name = pathArray[pathArray.length - 1];
-  pathArray.pop();
-  let pathWithoutFileName = pathArray.join("/");
+  const normalized = path.isAbsolute(solutionPath)
+    ? solutionPath
+    : path.join(rootPath, solutionPath);
 
-  pathWithoutFileName = path.join(rootPath, pathWithoutFileName);
+  if (!fs.existsSync(normalized)) {
+    showNotification(
+      "Error getting latest:",
+      `Path does not exist: ${normalized}`,
+      "error"
+    );
+    return;
+  }
+
+  const st = fs.statSync(normalized);
+  const pathWithoutFileName = st.isDirectory()
+    ? normalized
+    : path.dirname(normalized);
+  const name = path.basename(normalized);
+
   exec(
     `cd "${pathWithoutFileName}" && git checkout master_dev && git pull`,
     (error, stdout, stderr) => {
@@ -202,9 +214,32 @@ function updateDb(migratorRelativePath) {
 
 
 
-function launchOnCLI(startupProject) {
+function launchOnCLI(startupProject, category, npmScript) {
+  const startupProjectPath = path.resolve(startupProject);
+  const cat = category || "dotnet";
+
+  if (cat === "node") {
+    if (!fs.existsSync(startupProjectPath) || !fs.statSync(startupProjectPath).isDirectory()) {
+      console.error("❌ Node projects expect startupProject to be an existing directory.");
+      return;
+    }
+    const script = npmScript || "start";
+    const command = `cd "${startupProjectPath}" && npm run ${script}; echo; echo 'Press any key to exit...'; read -n 1`;
+    const osaScript = [
+      'tell application "Terminal"',
+      `do script "${command.replace(/(["\\$`])/g, '\\$1')}"`,
+      'activate',
+      'end tell'
+    ].join('\n');
+
+    spawn('osascript', ['-e', osaScript], {
+      detached: true,
+      stdio: "ignore"
+    }).unref();
+    return;
+  }
+
   const dotnetPath = "/usr/local/share/dotnet/dotnet";
-  const startupProjectPath = path.resolve(__dirname, startupProject);
 
   if (!fs.existsSync(dotnetPath) || fs.lstatSync(dotnetPath).isDirectory()) {
     console.error("❌ Invalid dotnet path: not a file or does not exist");
@@ -282,6 +317,8 @@ function loadSolutionsFromConfig(solutions,rootPath) {
     checkbox.id = solution.name.replace(/\s/g, "");
     checkbox.value = path.join(rootPath, solution.solutionPath);
     checkbox.data = path.join(rootPath, solution.startupProject);
+    checkbox._category = solution.category || "dotnet";
+    checkbox._npmScript = solution.npmScript || "start";
 
 
     const label = document.createElement("label");
@@ -320,18 +357,25 @@ function loadSolutionsFromConfig(solutions,rootPath) {
       const runInConsoleEl = document.createElement("button");
       runInConsoleEl.classList.add("btn", "btn-success", "btn-sm");
       runInConsoleEl.textContent = "Run In Console";
-      runInConsoleEl.onclick = () => launchOnCLI(path.join(rootPath, solution.startupProject));
+      runInConsoleEl.onclick = () =>
+        launchOnCLI(
+          path.join(rootPath, solution.startupProject),
+          solution.category,
+          solution.npmScript
+        );
       runInConsoleTd.appendChild(runInConsoleEl);
     }
 
     // Dockerize button column
     const dockerizeTd = document.createElement("td");
     dockerizeTd.classList.add("text-nowrap");
-    const dockerizeButton = document.createElement("button");
-    dockerizeButton.classList.add("btn", "btn-primary", "btn-sm");
-    dockerizeButton.textContent = "Dockerize";
-    dockerizeButton.onclick = () => dockerizeApp(solution,rootPath);
-    dockerizeTd.appendChild(dockerizeButton);
+    if (solution.contextFolder) {
+      const dockerizeButton = document.createElement("button");
+      dockerizeButton.classList.add("btn", "btn-primary", "btn-sm");
+      dockerizeButton.textContent = "Dockerize";
+      dockerizeButton.onclick = () => dockerizeApp(solution, rootPath);
+      dockerizeTd.appendChild(dockerizeButton);
+    }
 
     row.appendChild(checkboxTd);
     row.appendChild(getLatestTd);
